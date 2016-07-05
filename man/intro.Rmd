@@ -1,0 +1,58 @@
+---
+title: "Introduction to EasyTCGA"
+author: "Kliewer"
+date: "//2016"
+output: html_document
+---
+
+
+Remark that sometimes it is necessary to run the algorithms / particular functions of FirebrowseR 
+several times to get the data, i.e. if the output of an algorithm or especially a particular function 
+is NULL it does't imply always data absence (the explanation could be a lack of connection to the server)
+This error appears especially using the services \code{\link{Analyses.CopyNumber.Genes.All}} and \code{\link{Samples.mRNASeq}}.
+Downloading the whole particular data of a cohort often takes much time.
+
+
+```{r}
+source("dn_clinical.R")
+cohorts = dn_cohorts()
+cohort = "READ"
+read.barcodes = dn_patient_barcodes(cohort) 
+brca.clinical = dn_clinical_cohort(cohort)
+clinical = dn_clinical("ACC", "BLCA", "BRCA")
+tcga_participant_barcode = "TCGA-E9-A2JT" # it is a BRCA patient barcode
+page.Size = 2000
+gene_ID = dn_gene_ID(tcga_participant_barcode, page.Size)
+````
+
+```{r}
+source("dn_miRNA.R")
+cohort = "BLCA"
+tcga_participant_barcode = "TCGA-ZF-AA53"  # it is a BLCA patient barcode
+page.Size1 = 250
+sort_by =  "tcga_participant_barcode"
+mir = miRNA_ID[1:10]
+obj = dn_miRSeq(mir, cohort, tcga_participant_barcode, sort_by, page.Size1)
+page.Size2 = 2000
+blca.miRSeq = dn_miRSeq_cohort(cohort, page.Size2) 
+```
+
+```{r}
+source("dn_mRNA.R")
+gene = "AAAS" # "=mRNA_ID[10]"
+cohort = "ESCA"
+tcga_participant_barcode = c("TCGA-2H-A9GF", "TCGA-LN-A49M") # esca patient barcodes
+sort_by = "gene"
+page.Size1 = 250
+obj = dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size2)
+page_size2 = 2000
+esca.mRNASeq = dn_mRNA_cohort(cohort, page.Size)
+```
+
+```{r}
+source("Reshape.R")
+blca.miRSeq_reshaped = reshape.miRSeq(brca.miRSeq)
+esca.mRNASeq_reshaped = reshape.mRNASeq(esca.mRNASeq)
+```
+
+

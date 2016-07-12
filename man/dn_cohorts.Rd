@@ -2,17 +2,17 @@
 % Please edit documentation in R/dn_clinical.R
 \name{dn_cohorts}
 \alias{dn_cohorts}
-\title{Download all available cohorts / cancer types.
- @return A character vektor containing all TCGA cohort abbreviations which are relevant for the algorithms.
- @export
- @seealso \code{dn_cohorts} uses the service \code{\link{Metadata.Cohorts}}, see \code{\link{FirebrowseR}}.}
+\title{Download all available cohorts / cancer types.}
 \usage{
 dn_cohorts(filename = NULL)
 }
+\value{
+A character vektor containing all TCGA cohort abbreviations which are relevant for the algorithms.
+}
 \description{
 Download all available cohorts / cancer types.
- @return A character vektor containing all TCGA cohort abbreviations which are relevant for the algorithms.
- @export
- @seealso \code{dn_cohorts} uses the service \code{\link{Metadata.Cohorts}}, see \code{\link{FirebrowseR}}.
+}
+\seealso{
+\code{dn_cohorts} uses the service \code{\link{Metadata.Cohorts}}, see \code{\link{FirebrowseR}}.
 }
 

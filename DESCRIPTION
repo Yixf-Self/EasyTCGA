@@ -6,5 +6,10 @@ Author: Sangkyun Lee <sanglee77@gmail.com>, Viktoria Kliewer <>
 Maintainer: Sangkyun Lee <sanglee77@gmail.com>
 Description:
 License: GPL-2
-Depends: R (>= 2.15.0), parallel, devtools, FirebrowseR
+Depends:
+    R (>= 2.15.0),
+    parallel
 LazyData: TRUE
+RoxygenNote: 5.0.1
+Imports: FirebrowseR
+Remotes: mariodeng/FirebrowseR

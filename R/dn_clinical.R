@@ -3,20 +3,19 @@ require("FirebrowseR")
 require("plyr")
 require("parallel")
 
-# 1.
-#'  Download all available cohorts / cancer types.
-#'  @return A character vektor containing all TCGA cohort abbreviations which are relevant for the algorithms.
-#'  @export
-#'  @seealso \code{dn_cohorts} uses the service \code{\link{Metadata.Cohorts}}, see \code{\link{FirebrowseR}}.
+#' Download all available cohorts / cancer types.
+#' @return A character vektor containing all TCGA cohort abbreviations which are relevant for the algorithms.
+#' @export
+#' @seealso \code{dn_cohorts} uses the service \code{\link{Metadata.Cohorts}}, see \code{\link{FirebrowseR}}.
 dn_cohorts = function( filename=NULL ){
 
-cohorts = Metadata.Cohorts( format = "csv", cohort = "" )
-cohorts = cohorts[,1]
+  cohorts = Metadata.Cohorts( format = "csv", cohort = "" )
+  cohorts = cohorts[,1]
 
-#  if(is.null(filename)) {
-#    filename = sprintf("cohorts.Rdata");
-#  }
-#  save(list=c("cohorts"), file=filename);
+  #  if(is.null(filename)) {
+  #    filename = sprintf("cohorts.Rdata");
+  #  }
+  #  save(list=c("cohorts"), file=filename);
 
 return(cohorts)
 
@@ -26,14 +25,12 @@ return(cohorts)
 # Remark: GBMLGG is composed of GBM and LGG, COADREAD is composed of COAD and READ
 #         and KIPAN is composed of KICH, KIRC and KIRP
 
-# 2.
 #' Download all available clinical data of one cohort.
 #' @param cohort A character vector indicating the cohort to query. See \code{\link{dn_cohorts}} for available cohorts.
 #' @return data.frame of all patient clinical data elements of one cohort.
 #' @export
 #' @seealso \code{dn_clinical} uses the service \code{\link{Samples.Clinical}}, see \code{\link{FirebrowseR}}.
-
-dn_clinical_cohort = function(cohort, filename=NULL) {
+dn_clinical_one = function(cohort, filename=NULL) {
 
   all.Received = F
   page.Counter = 1
@@ -66,7 +63,6 @@ dn_clinical_cohort = function(cohort, filename=NULL) {
 
 
 
-# 3.
 #' Download available clinical data of multiple / all cohorts.
 #' @param cohorts A character vector indicating the cohort(s) to query. See \code{\link{dn_cohorts}} for available cohorts.
 #' @return data.frame of patient clinical data of multiple / all cohorts.
@@ -77,7 +73,7 @@ dn_clinical = function(cohorts, filename=NULL) {
     clinical = list()
     page.Size = 2000
 
-    clinical = mclapply(cohorts, dn_clinical_cohort, mc.cores = 20) # mc.scores < 32
+    clinical = mclapply(cohorts, dn_clinical_one, mc.cores = 20) # mc.scores < 32
 
     clinical = do.call(rbind.fill, clinical)
 
@@ -91,40 +87,30 @@ dn_clinical = function(cohorts, filename=NULL) {
 
 
 
-
-# 4.
-#' Download patient barcodes with corresponding cohort abbreviations of cohort(s) to query.
-#' @param cohort A character vector indicating the cohort(s) to query. See \code{\link{dn_cohorts}} for available cohorts.
-#' @return A data.frame containing TCGA barcodes of the cohort(s) with corresponding cohort abbreviations.
+#' Extract TCGA patient barcodes from clinical data.
+#' @param clinical A data frame containing clinical data. See \code{\link{dn_clinical}}.
+#' @return A character vector containing TCGA barcodes.
 #' @export
-#' @seealso \code{\link{dn_clinical_all}}
-dn_patient_barcodes = function(cohort, filename=NULL){
+patient_barcodes = function(clinical){
 
-  clinical = dn_clinical(cohorts)
-  barcodes = clinical[,1:2]
-
- #  if(is.null(filename)) {
- #    filename = sprintf("all.pats.Rdata");
- #  }
- #  save(list=c("patient_barcodes"), file=filename);
+  barcodes = clinical[,"tcga_participant_barcode"]
 
  return(barcodes)
 }
 
 
 
-
-
-
-# 5.
 #' Download all available genes.
 #' @param tcga_participant_barcode A character containing a random TCGA patient barcode. See e.g. \code{\link{dn_patient_barcodes}} for available barcodes.
 #' @param page.Size Number of records per page. Usually max is 2000.
 #' @return A character vector of all available gene symbols.
 #' @export
 #' @seealso \code{dn_gene_all} uses the service \code{\link{Analyses.CopyNumber.Genes.All}}, see \code{\link{FirebrowseR}}.
-
-
+#' @examples
+#' cohort = "BRCA"
+#' clinical = dn_clinical(cohort)
+#' barcodes = patient_barcodes(clinical) # returns all patient barcodes of the cohort BRCA
+#' gene_IDs = dn_gene_ID(barcodes[1], page.Size=2000)
 dn_gene_ID = function(tcga_participant_barcode, page.Size, filename=NULL){
 
   all.Received = F
@@ -157,19 +143,6 @@ dn_gene_ID = function(tcga_participant_barcode, page.Size, filename=NULL){
 
   return(gene_ID)
 }
-
-#' @examples
-#' t = proc.time()
-#' cohorts = dn_cohorts()
-#' cohort = "BRCA"
-#' brca.clinical = dn_clinical_cohort(cohort)
-#' brca.barcodes = dn_patient_barcodes(cohort) # returns all patient barcodes of the cohort BRCA
-#' clinical = dn_clinical_all("ACC", "BLCA", "BRCA") # returns clinical data of cohorts ACC, BLCA and BRCA
-#' barcodes = dn_patient_barcodes(clinical) # returns all patient barcodes of cohorts ACC, BLCA and BRCA
-#' tcga_participant_barcode = "TCGA-E9-A2JT" # it is a BRCA patient barcode
-#' page.Size = 2000
-#' gene_ID = dn_gene_ID(tcga_participant_barcode, page.Size)
-#' cat(proc.time() - t)
 
 
 

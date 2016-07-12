@@ -9,7 +9,7 @@ dn_miRSeq_cohort(cohort, page.Size, filename = NULL)
 \arguments{
 \item{cohort}{A character vector indicating the cohort to query. See \code{\link{dn_cohorts}} for available cohorts.}
 
-\item{page.Size}{Number of records per page. Usually max is 2000. # If there is an error "Error in miRNA.cohort[[page.Counter]]: subscript out of bounds", try a smaller page.Size.}
+\item{page.Size}{Number of records per page. Usually max is 2000.}
 }
 \value{
 data.frame of sample-level log2 miRSeq expression values of the specified cohort.
@@ -18,6 +18,6 @@ data.frame of sample-level log2 miRSeq expression values of the specified cohort
 Download all available sample-level log2 miRSeq expression values of one cohort.
 }
 \seealso{
-\code{dn_miRNA_cohort} uses the service \code{\link{dn_miRSeq}}.
+\code{dn_miRSeq_cohort} uses the service \code{\link{dn_miRSeq}}.
 }
 

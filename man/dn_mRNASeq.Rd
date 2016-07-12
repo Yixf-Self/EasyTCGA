@@ -16,7 +16,7 @@ dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size,
 
 \item{sort_by}{A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, gene, protocol and sample_type.}
 
-\item{page.Size}{Number of records per page. Usually max is 2000. For cancers with small number of patients use a small page.Size, e.g. page.Size = 250. # If there is an error "Error in mRNA.Exp[[page.Counter]]: subscript out of bounds", run the algorithm again or try a smaller page.Size.}
+\item{page.Size}{Number of records per page. Usually max is 2000. For cancers with small number of patients use a small page.Size, e.g. page.Size = 250.}
 }
 \value{
 data.frame of log2 mRNASeq expression values.

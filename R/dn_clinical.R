@@ -99,50 +99,51 @@ patient_barcodes = function(clinical){
 }
 
 
+#'
+#' #' Download all available genes.
+#' #' @param tcga_participant_barcode A character containing a random TCGA patient barcode. See e.g. \code{\link{dn_patient_barcodes}} for available barcodes.
+#' #' @param page.Size Number of records per page. Usually max is 2000.
+#' #' @return A character vector of all available gene symbols.
+#' #' @export
+#' #' @seealso \code{dn_gene_all} uses the service \code{\link{Analyses.CopyNumber.Genes.All}}, see \code{\link{FirebrowseR}}.
+#' #' @examples
+#' #' cohort = "BRCA"
+#' #' clinical = dn_clinical(cohort)
+#' #' barcodes = patient_barcodes(clinical) # returns all patient barcodes of the cohort BRCA
+#' #' gene_IDs = dn_gene_ID(barcodes[1], page.Size=2000)
+#' dn_gene_ID = function(tcga_participant_barcode, page.Size, filename=NULL){
+#'
+#'   all.Received = F
+#'   page.Counter = 1
+#'   gene_ID = list()
+#'
+#'   while(all.Received == F){
+#'     gene_ID[[page.Counter]] = Analyses.CopyNumber.Genes.All(format = "csv", cohort = "", gene = "",
+#'                                                               tcga_participant_barcode = tcga_participant_barcode, page = page.Counter,
+#'                                                               page_size = page.Size, sort_by = "gene")
+#'     if(page.Counter > 1)
+#'       colnames(gene_ID[[page.Counter]]) = colnames(gene_ID[[page.Counter-1]])
+#'
+#'     if(nrow(gene_ID[[page.Counter]]) < page.Size){
+#'       all.Received = T
+#'     } else{
+#'       page.Counter = page.Counter + 1
+#'     }
+#'   }
+#'
+#'   gene_ID = do.call(rbind, gene_ID)
+#'   gene_ID = gene_ID[ ,colnames(gene_ID)=="gene"]
+#'   idx = grep("TRUE", duplicated(gene_ID))
+#'   gene_ID = gene_ID[-idx]
+#'
+#'   #  if(is.null(filename)) {
+#'   #    filename = sprintf("gene_ID.Rdata");
+#'   #  }
+#'   #  save(list=c("gene_IDs"), file=filename);
+#'
+#'   return(gene_ID)
+#' }
 
-#' Download all available genes.
-#' @param tcga_participant_barcode A character containing a random TCGA patient barcode. See e.g. \code{\link{dn_patient_barcodes}} for available barcodes.
-#' @param page.Size Number of records per page. Usually max is 2000.
-#' @return A character vector of all available gene symbols.
-#' @export
-#' @seealso \code{dn_gene_all} uses the service \code{\link{Analyses.CopyNumber.Genes.All}}, see \code{\link{FirebrowseR}}.
-#' @examples
-#' cohort = "BRCA"
-#' clinical = dn_clinical(cohort)
-#' barcodes = patient_barcodes(clinical) # returns all patient barcodes of the cohort BRCA
-#' gene_IDs = dn_gene_ID(barcodes[1], page.Size=2000)
-dn_gene_ID = function(tcga_participant_barcode, page.Size, filename=NULL){
-
-  all.Received = F
-  page.Counter = 1
-  gene_ID = list()
-
-  while(all.Received == F){
-    gene_ID[[page.Counter]] = Analyses.CopyNumber.Genes.All(format = "csv", cohort = "", gene = "",
-                                                              tcga_participant_barcode = tcga_participant_barcode, page = page.Counter,
-                                                              page_size = page.Size, sort_by = "gene")
-    if(page.Counter > 1)
-      colnames(gene_ID[[page.Counter]]) = colnames(gene_ID[[page.Counter-1]])
-
-    if(nrow(gene_ID[[page.Counter]]) < page.Size){
-      all.Received = T
-    } else{
-      page.Counter = page.Counter + 1
-    }
-  }
-
-  gene_ID = do.call(rbind, gene_ID)
-  gene_ID = gene_ID[ ,colnames(gene_ID)=="gene"]
-  idx = grep("TRUE", duplicated(gene_ID))
-  gene_ID = gene_ID[-idx]
-
-  #  if(is.null(filename)) {
-  #    filename = sprintf("gene_ID.Rdata");
-  #  }
-  #  save(list=c("gene_IDs"), file=filename);
-
-  return(gene_ID)
-}
 
 
 

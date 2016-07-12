@@ -21,7 +21,7 @@ Download all available genes.
 cohort = "BRCA"
 clinical = dn_clinical(cohort)
 barcodes = patient_barcodes(clinical) # returns all patient barcodes of the cohort BRCA
-#gene_IDs = dn_gene_ID(barcodes[1], page.Size=2000)
+gene_IDs = dn_gene_ID(barcodes[1], page.Size=2000)
 }
 \seealso{
 \code{dn_gene_all} uses the service \code{\link{Analyses.CopyNumber.Genes.All}}, see \code{\link{FirebrowseR}}.

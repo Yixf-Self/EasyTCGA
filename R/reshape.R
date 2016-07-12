@@ -34,6 +34,7 @@ reshape.miRSeq = function(data, sample_type = "TP"){
 #' @param data data.frame of log2 mRNASeq expression values. See \code{\link{dn_mRNASeq}} for downloading these values.
 #' @return nxp-matrix, n = number of patients, p = number of genes, (matrix(i,j))_{i,j} = ((data$tcga_participant_barcode==barcode[i], data$gene==gene[j]))_{i,j}
 #' @export
+#'
 reshape.mRNASeq = function(data, sample_type = "TP"){
 
   cat("Info: the sample types of the data are:", unique(data$sample_type))

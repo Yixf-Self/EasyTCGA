@@ -17,7 +17,7 @@ dn_cohorts = function( filename=NULL ){
   #  }
   #  save(list=c("cohorts"), file=filename);
 
-return(cohorts)
+  return(cohorts)
 
 }
 
@@ -73,7 +73,7 @@ dn_clinical = function(cohorts, filename=NULL) {
     clinical = list()
     page.Size = 2000
 
-    clinical = mclapply(cohorts, dn_clinical_one, mc.cores = 20) # mc.scores < 32
+    clinical = mclapply(cohorts, dn_clinical_one, mc.cores = detectCores()/2)
 
     clinical = do.call(rbind.fill, clinical)
 
@@ -91,11 +91,16 @@ dn_clinical = function(cohorts, filename=NULL) {
 #' @param clinical A data frame containing clinical data. See \code{\link{dn_clinical}}.
 #' @return A character vector containing TCGA barcodes.
 #' @export
+#' @examples
+#' cohort = "BRCA"
+#' clinical = dn_clinical(cohort)
+#' barcodes = patient_barcodes(clinical) # returns all patient barcodes of the cohort BRCA
+#' #mRNA_ID
 patient_barcodes = function(clinical){
 
   barcodes = clinical[,"tcga_participant_barcode"]
 
- return(barcodes)
+  return(barcodes)
 }
 
 

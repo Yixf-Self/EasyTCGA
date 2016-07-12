@@ -14,7 +14,7 @@ dn_mutation.Exp(tcga_participant_barcode, cohort, gene, page.Size, sort_by,
 
 \item{gene}{A character vector containing gene symbols. See \code{\link{dn_gene_ID}} for available gene symbols.}
 
-\item{page.Size}{Number of records per page. For downloading data of single barcodes or genes the page.Size should be chosen small, i.e. 25, but usually not larger than 1000. # If there is an error "Error in mut.Exp[[page.Counter]]: subscript out of bounds", try another (usually smaller) page.Size.}
+\item{page.Size}{Number of records per page. For downloading data of single barcodes or genes the page.Size should be chosen small, i.e. 25, but usually not larger than 1000.}
 
 \item{sort_by}{A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, tool and gene.}
 }

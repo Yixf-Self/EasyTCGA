@@ -15,4 +15,10 @@ A character vector containing TCGA barcodes.
 \description{
 Extract TCGA patient barcodes from clinical data.
 }
+\examples{
+cohort = "BRCA"
+clinical = dn_clinical(cohort)
+barcodes = patient_barcodes(clinical) # returns all patient barcodes of the cohort BRCA
+#mRNA_ID
+}
 

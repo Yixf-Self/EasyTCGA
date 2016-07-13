@@ -63,7 +63,7 @@ dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, sort_by, page.Size
 
 dn_mRNASeq_cohort = function(cohort, page.Size, filename=NULL){
 
-  cohort.mRNASeq = mclapply(mRNA_ID, dn_mRNASeq, cohort, "", "gene", page.Size, mc.cores=32)
+  cohort.mRNASeq = mclapply(mRNA_ID, dn_mRNASeq, cohort, "", "gene", page.Size, mc.cores=detectCores()/2)
 
   if(length(cohort.mRNASeq)<1){
     cohort.mRNASeq = NULL

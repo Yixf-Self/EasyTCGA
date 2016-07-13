@@ -4,6 +4,11 @@
 #' @param data data.frame of log2 miRSeq expression values. See \code{\link{dn_miRSeq}} for downloading these values.
 #' @return nxp-matrix, n = number of patients, p = number of mirs, (matrix(i,j))_{i,j} = ((data$tcga_participant_barcode==barcode[i], data$mir==mir[j]))_{i,j}
 #' @export
+#' @examples
+#' cohort = "ESCA"
+#' page_size = 2000
+#' esca.miRSeq = dn_miRSeq_cohort(cohort, page.Size)
+#' esca.miRSeq_reshaped = reshape.miRSeq (esca.miRSeq, sample_type = "TP")
 reshape.miRSeq = function(data, sample_type = "TP"){
 
   cat("Info: the sample types of the data are:", unique(data$sample_type) )
@@ -34,7 +39,12 @@ reshape.miRSeq = function(data, sample_type = "TP"){
 #' @param data data.frame of log2 mRNASeq expression values. See \code{\link{dn_mRNASeq}} for downloading these values.
 #' @return nxp-matrix, n = number of patients, p = number of genes, (matrix(i,j))_{i,j} = ((data$tcga_participant_barcode==barcode[i], data$gene==gene[j]))_{i,j}
 #' @export
-#'
+#' @examples
+#' cohort = "ESCA"
+#' page_size = 2000
+#' esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size)
+#' esca.mRNASeq_reshaped = reshape.mRNASeq (esca.mRNASeq, sample_type = "TP"
+
 reshape.mRNASeq = function(data, sample_type = "TP"){
 
   cat("Info: the sample types of the data are:", unique(data$sample_type))
@@ -57,16 +67,5 @@ reshape.mRNASeq = function(data, sample_type = "TP"){
 
 }
 
-#'
-#'
-#'
-#' #' @examples
-#' #' cohort = "ESCA"
-#' #' page_size = 2000
-#' #' esca.miRSeq = dn_miRSeq_cohort(cohort, page.Size)
-#' #' esca.miRSeq_reshaped = reshape.miRSeq (esca.miRSeq, sample_type = "TP")
-#' #' esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size)
-#' #' esca.mRNASeq_reshaped = reshape.mRNASeq (esca.mRNASeq, sample_type = "TP")
-#'
-#'
-#'
+
+

@@ -4,7 +4,7 @@
 \alias{dn_miRSeq}
 \title{Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode. At least one miR must be supplied.}
 \usage{
-dn_miRSeq(mir, cohort, tcga_participant_barcode, sort_by, page.Size,
+dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by,
   filename = NULL)
 }
 \arguments{
@@ -14,15 +14,23 @@ dn_miRSeq(mir, cohort, tcga_participant_barcode, sort_by, page.Size,
 
 \item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{dn_patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
 
-\item{sort_by}{A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, tool, mir and sample_type.}
-
 \item{page.Size}{Number of records per page. Usually max is 2000.}
+
+\item{sort_by}{A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, tool, mir and sample_type.}
 }
 \value{
 data.frame of log2 miRSeq expression values.
 }
 \description{
 Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode. At least one miR must be supplied.
+}
+\examples{
+mir = miRNA_ID[1:10]
+cohort = "BLCA"
+tcga_participant_barcode = "TCGA-ZF-AA53"  # it is a BLCA patient barcode
+page.Size = 250
+sort_by =  "tcga_participant_barcode"
+obj = dn_miRSeq(mir, cohort, tcga_participant_barcode, sort_by, page.Size)
 }
 \seealso{
 \code{dn_miRSeq} uses the service \code{\link{Samples.miRSeq}}, see \code{\link{FirebrowseR}}.

@@ -17,6 +17,11 @@ data.frame of sample-level log2 miRSeq expression values of the specified cohort
 \description{
 Download all available sample-level log2 miRSeq expression values of one cohort.
 }
+\examples{
+cohort = "BLCA"
+page.Size = 2000
+blca.miRSeq = dn_miRSeq_cohort(cohort, page.Size)
+}
 \seealso{
 \code{dn_miRSeq_cohort} uses the service \code{\link{dn_miRSeq}}.
 }

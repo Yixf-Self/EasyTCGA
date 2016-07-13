@@ -17,8 +17,7 @@ Extract TCGA patient barcodes from clinical data.
 }
 \examples{
 cohort = "BRCA"
-clinical = dn_clinical(cohort)
-barcodes = patient_barcodes(clinical) # returns all patient barcodes of the cohort BRCA
-#mRNA_ID
+brca.clinical = dn_clinical_one(cohort)
+brca.barcodes = patient_barcodes(clinical) # returns all patient barcodes of the cohort BRCA
 }
 

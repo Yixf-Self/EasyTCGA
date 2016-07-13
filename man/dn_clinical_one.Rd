@@ -15,6 +15,10 @@ data.frame of all patient clinical data elements of one cohort.
 \description{
 Download all available clinical data of one cohort.
 }
+\examples{
+cohort = "BRCA"
+brca.clinical = dn_clinical_one(cohort)
+}
 \seealso{
 \code{dn_clinical} uses the service \code{\link{Samples.Clinical}}, see \code{\link{FirebrowseR}}.
 }

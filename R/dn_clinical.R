@@ -76,7 +76,7 @@ dn_clinical_one = function(cohort, filename=NULL) {
 #' @param cohorts A character vector indicating the cohort(s) to query. See \code{\link{dn_cohorts}} for available cohorts.
 #' @return data.frame of patient clinical data of multiple / all cohorts.
 #' @export
-#' @seealso \code{dn_clinical} uses the service \code{\link{dn_clinical_one}}. Note that for downloading all available barcodes, see \code{\link{dn_patient_barcodes}}, the object cohorts is a character vector containing all available cohort abbreviations.
+#' @seealso \code{dn_clinical} uses the service \code{\link{dn_clinical_one}}. Note that for downloading all available barcodes, see \code{\link{patient_barcodes}}, the object cohorts is a character vector containing all available cohort abbreviations.
 #' @examples
 #' cohorts = c("ACC", "BLCA", "COAD")
 #' clinical = dn_clinical(cohorts)

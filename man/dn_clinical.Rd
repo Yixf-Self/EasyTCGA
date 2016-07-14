@@ -20,6 +20,6 @@ cohorts = c("ACC", "BLCA", "COAD")
 clinical = dn_clinical(cohorts)
 }
 \seealso{
-\code{dn_clinical} uses the service \code{\link{dn_clinical_one}}. Note that for downloading all available barcodes, see \code{\link{dn_patient_barcodes}}, the object cohorts is a character vector containing all available cohort abbreviations.
+\code{dn_clinical} uses the service \code{\link{dn_clinical_one}}. Note that for downloading all available barcodes, see \code{\link{patient_barcodes}}, the object cohorts is a character vector containing all available cohort abbreviations.
 }
 

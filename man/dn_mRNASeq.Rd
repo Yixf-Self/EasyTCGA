@@ -12,7 +12,7 @@ dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size,
 
 \item{cohort}{A character vector indicating cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.}
 
-\item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See e.g. \code{\link{dn_patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
+\item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See e.g. \code{\link{patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
 
 \item{sort_by}{A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, gene, protocol and sample_type.}
 

@@ -8,7 +8,7 @@ dn_mutation.Exp(tcga_participant_barcode, cohort, gene, page.Size, sort_by,
   filename = NULL)
 }
 \arguments{
-\item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{dn_patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
+\item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
 
 \item{cohort}{A character vector containing the cohort(s) to query. See \code{\link{dn_cohorts}} for available cohorts.}
 

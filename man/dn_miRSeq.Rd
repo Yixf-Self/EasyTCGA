@@ -12,7 +12,7 @@ dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by,
 
 \item{cohort}{A character vector containing the cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.}
 
-\item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{dn_patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
+\item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
 
 \item{page.Size}{Number of records per page. Usually max is 2000.}
 

@@ -13,7 +13,13 @@ require("plyr")
 #' @return data.frame of log2 mRNASeq expression values.
 #' @export
 #' @seealso  \code{dn_mRNASeq} uses the service \code{\link{Samples.mRNASeq}}, see \code{\link{FirebrowseR}}.
-
+#' @examples
+#' gene = "AAAS" # "=mRNA_ID[10]"
+#' cohort = "ESCA"
+#' tcga_participant_barcode = c("TCGA-2H-A9GF", "TCGA-LN-A49M") # esca patient barcodes
+#' sort_by = "gene"
+#' page.Size = 250
+#' obj = dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size2)
 dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, sort_by, page.Size, filename=NULL) {
 
   all.Found = F
@@ -60,7 +66,10 @@ dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, sort_by, page.Size
 #' @return data.frame of sample-level log2 mRNASeq expression values of the specified cohort.
 #' @export
 #' @seealso \code{dn_mRNASeq_cohort} uses the service \code{\link{dn_mRNASeq}}.
-
+#' @examples
+#' cohort = "ESCA"
+#' page_size = 2000
+#' esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size2)
 dn_mRNASeq_cohort = function(cohort, page.Size, filename=NULL){
 
   cohort.mRNASeq = mclapply(mRNA_ID, dn_mRNASeq, cohort, "", "gene", page.Size, mc.cores=detectCores()/2)
@@ -74,18 +83,5 @@ dn_mRNASeq_cohort = function(cohort, page.Size, filename=NULL){
   return(cohort.mRNASeq)
 
 }
-
-
-
-
-#' @examples
-#' gene = "AAAS" # "=mRNA_ID[10]"
-#' cohort = "ESCA"
-#' tcga_participant_barcode = c("TCGA-2H-A9GF", "TCGA-LN-A49M") # esca patient barcodes
-#' sort_by = "gene"
-#' page.Size1 = 250
-#' obj = dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size2)
-#' page_size2 = 2000
-#' esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size2)
 
 

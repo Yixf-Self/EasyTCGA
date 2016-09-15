@@ -2,10 +2,13 @@
 #' Reshape sample-level log2 miRSeq expression values of the sample type TP. Primarily this service is intended to reshape all sample-level log2 miRSeq expression values of one cohort.
 #' See \code{\link{dn_miRSeq_cohort}}.
 #' @param data data.frame of log2 miRSeq expression values. See \code{\link{dn_miRSeq}} for downloading these values.
-#' @return nxp-matrix, n = number of patients, p = number of mirs, (matrix(i,j))_{i,j} = ((data$tcga_participant_barcode==barcode[i], data$mir==mir[j]))_{i,j}
-#' @export
-#' @examples
-#' cohort = "ESCA"
+#' @return nxp-matrix, n = number of patients, p = number of mirs, \cr
+#'         (matrix(i,j))_{i,j} =  (expression_log2)_{ij}, where \cr
+#'         data$tcga_participant_barcode==barcode[i], data$mir==mir[j], \cr
+#'         i=1,..,n, j=1,...,p
+#' @export  
+#' @examples  
+#' cohort = "ESCA"     
 #' page_size = 2000
 #' esca.miRSeq = dn_miRSeq_cohort(cohort, page.Size)
 #' esca.miRSeq_reshaped = reshape.miRSeq (esca.miRSeq, sample_type = "TP")
@@ -14,9 +17,9 @@ reshape.miRSeq = function(data, sample_type = "TP"){
   cat("Info: the sample types of the data are:", unique(data$sample_type) )
   data = subset(data, data$sample_type=="TP")
   idx = which(colnames(data)=='expression_log2')
-  barcode = unique(data[,"tcga_participant_barcode"])
+  barcode = unique(data[,"tcga_participant_barcode"]) 
   mir = unique(data[,"mir"])
-  n = length(barcode)
+  n = length(barcode) 
   p = length(mir)
   matrix = matrix(0, nrow = n, ncol = p)
   colnames(matrix) = mir
@@ -37,13 +40,16 @@ reshape.miRSeq = function(data, sample_type = "TP"){
 #' Reshape sample-level log2 mRNASeq expression values of the sample type TP. Primarily this service is intended to reshape all sample-level log2 mRNASeq expression values of one cohort.
 #' See \code{\link{dn_mRNASeq_cohort}}.
 #' @param data data.frame of log2 mRNASeq expression values. See \code{\link{dn_mRNASeq}} for downloading these values.
-#' @return nxp-matrix, n = number of patients, p = number of genes, (matrix(i,j))_{i,j} = ((data$tcga_participant_barcode==barcode[i], data$gene==gene[j]))_{i,j}
+#' @return nxp-matrix, n = number of patients, p = number of genes, \cr
+#'         (matrix(i,j))_{i,j} = (matrix(i,j))_{i,j} =  (expression_log2)_{ij}, where \cr
+#'         data$tcga_participant_barcode==barcode[i], data$gene==gene[j], \cr
+#'         i=1,..,n, j=1,...,p
 #' @export
 #' @examples
 #' cohort = "ESCA"
 #' page_size = 2000
 #' esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size)
-#' esca.mRNASeq_reshaped = reshape.mRNASeq (esca.mRNASeq, sample_type = "TP"
+#' esca.mRNASeq_reshaped = reshape.mRNASeq (esca.mRNASeq, sample_type = "TP")
 
 reshape.mRNASeq = function(data, sample_type = "TP"){
 

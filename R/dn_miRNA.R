@@ -7,7 +7,7 @@ require("plyr")
 
 
 #' Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode. At least one miR must be supplied.
-#' @param mir A character vector containing miR names, empty string queries all miR names. See \code{\link{miRNA_ID.R}} for available miR names.
+#' @param mir A character vector containing miR names. See \code{\link{miRNA_ID.R}} for available miR names.
 #' @param cohort A character vector containing the cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.
 #' @param tcga_participant_barcode A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.
 #' @param sort_by A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, tool, mir and sample_type.
@@ -21,7 +21,7 @@ require("plyr")
 #' tcga_participant_barcode = "TCGA-ZF-AA53"  # it is a BLCA patient barcode
 #' page.Size = 250
 #' sort_by =  "tcga_participant_barcode"
-#' obj = dn_miRSeq(mir, cohort, tcga_participant_barcode, sort_by, page.Size)
+#' obj = dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by)
 dn_miRSeq = function(mir, cohort, tcga_participant_barcode, page.Size, sort_by, filename=NULL){
 
   all.Found = F
@@ -75,7 +75,7 @@ dn_miRSeq_cohort = function(cohort, page.Size, filename=NULL){
 
   cohort.miRSeq = list()
 
-  cohort.miRSeq = mclapply(miRNA_ID, dn_miRSeq, cohort, "", "mir", page.Size, mc.cores=detectCores()/2)
+  cohort.miRSeq = mclapply(miRNA_ID, dn_miRSeq, cohort, "", page.Size, "mir", mc.cores=detectCores()/2)
 
   if (length(cohort.miRSeq) < 1){
     cohort.miRSeq = NULL

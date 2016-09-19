@@ -1,6 +1,6 @@
 
 require("FirebrowseR")
-require("plyr")
+require("plyr") 
 require("parallel")
 
 
@@ -34,7 +34,7 @@ dn_cohorts = function( filename=NULL ){
 #' @param cohort A character vector indicating the cohort to query. See \code{\link{dn_cohorts}} for available cohorts.
 #' @return data.frame of all patient clinical data elements of one cohort.
 #' @export
-#' @seealso \code{dn_clinical} uses the service \code{\link{Samples.Clinical}}, see \code{\link{FirebrowseR}}.
+#' @seealso \code{dn_clinical_one} uses the service \code{\link{Samples.Clinical}}, see \code{\link{FirebrowseR}}.
 #' @examples
 #' cohort = "BRCA"
 #' brca.clinical = dn_clinical_one(cohort)
@@ -94,14 +94,14 @@ dn_clinical = function(cohorts, filename=NULL) {
  #   }
  #  save(list=c("clinical_data"), file=filename);
 
-   return (clinical)
+   return (clinical)  
 }
-
-
+ 
+  
 
 
 #' Extract TCGA patient barcodes from clinical data.
-#' @param clinical A data frame containing clinical data. See \code{\link{dn_clinical}}.
+#' @param clinical A data frame containing clinical data. See \code{\link{dn_clinical_one}} and \code{\link{dn_clinical}}.
 #' @return A character vector containing TCGA barcodes.
 #' @export
 #' @examples

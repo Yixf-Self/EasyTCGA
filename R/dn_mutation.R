@@ -23,7 +23,9 @@ require("plyr")
 #' sort_by = "gene"
 #' obj = dn_mutation.Exp(tcga_participant_barcode, cohort, gene, page.Size, sort_by)
 dn_mutation.Exp  = function(tcga_participant_barcode, cohort, gene, page.Size, sort_by, filename=NULL){
-
+  #
+  #cat("barcode =", tcga_participant_barcode, "cohort =", cohort, "gene =", gene, "size =", page.Size, "sort_by =", sort_by)
+  #cat(".")
   all.Found = F
   page.Counter = 1
   mut.Exp = list()
@@ -53,7 +55,7 @@ dn_mutation.Exp  = function(tcga_participant_barcode, cohort, gene, page.Size, s
   } else{
     mut.Exp = rbind.fill(mut.Exp)
   }
-
+  
   return(mut.Exp)
 
 }
@@ -74,8 +76,9 @@ dn_mutation_cohort = function(cohort, page.Size, filename=NULL){
 
   cohort.mutation = list()
   cohort.clinical = dn_clinical_one(cohort)
-
-  cohort.mutation = mclapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene", mc.cores=detectCores()/2)
+ # dn_mutation.Exp  = function(tcga_participant_barcode, cohort, gene, page.Size, sort_by, filename=NULL){
+#   cohort.mutation = mclapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene", mc.cores=detectCores()/4)
+cohort.mutation = lapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene")
 
   if(is.null(cohort.mutation) || length(cohort.mutation)<1) {
     cohort.mutation = NULL

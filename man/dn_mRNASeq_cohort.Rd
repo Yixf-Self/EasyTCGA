@@ -19,6 +19,11 @@ data.frame of sample-level log2 mRNASeq expression values of the specified cohor
 \description{
 Download all available sample-level log2 mRNASeq expression values of one cohort.
 }
+\examples{
+cohort = "ESCA"
+page_size = 2000
+esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size2)
+}
 \seealso{
 \code{dn_mRNASeq_cohort} uses the service \code{\link{dn_mRNASeq}}.
 }

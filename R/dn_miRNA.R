@@ -6,7 +6,7 @@ require("plyr")
 
   
 
-#' Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode. At least one miR must be supplied.
+#' Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode.
 #' @param mir A character vector containing miR names. At least one mir must be supplied. See \code{\link{miRNA_ID.R}} for available miR names.
 #' @param cohort A character vector containing the cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.
 #' @param tcga_participant_barcode A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.
@@ -18,7 +18,7 @@ require("plyr")
 #' @examples
 #' mir = miRNA_ID[1:10]
 #' cohort = "BLCA"
-#' tcga_participant_barcode = "TCGA-ZF-AA53"  # it is a BLCA patient barcode
+#' tcga_participant_barcode = "TCGA-ZF-AA53"  # TCGA patient barcode from BLCA
 #' page.Size = 250
 #' sort_by =  "tcga_participant_barcode"
 #' obj = dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by)

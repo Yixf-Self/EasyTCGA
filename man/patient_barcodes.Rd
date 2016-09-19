@@ -7,7 +7,7 @@
 patient_barcodes(clinical)
 }
 \arguments{
-\item{clinical}{A data frame containing clinical data. See \code{\link{dn_clinical}}.}
+\item{clinical}{A data frame containing clinical data. See \code{\link{dn_clinical_one}} and \code{\link{dn_clinical}}.}
 }
 \value{
 A character vector containing TCGA barcodes.

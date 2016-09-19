@@ -20,6 +20,6 @@ cohort = "BRCA"
 brca.clinical = dn_clinical_one(cohort)
 }
 \seealso{
-\code{dn_clinical} uses the service \code{\link{Samples.Clinical}}, see \code{\link{FirebrowseR}}.
+\code{dn_clinical_one} uses the service \code{\link{Samples.Clinical}}, see \code{\link{FirebrowseR}}.
 }
 

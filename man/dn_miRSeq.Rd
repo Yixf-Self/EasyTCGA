@@ -8,7 +8,7 @@ dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by,
   filename = NULL)
 }
 \arguments{
-\item{mir}{A character vector containing miR names, empty string queries all miR names. See \code{\link{miRNA_ID.R}} for available miR names.}
+\item{mir}{A character vector containing miR names. See \code{\link{miRNA_ID.R}} for available miR names.}
 
 \item{cohort}{A character vector containing the cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.}
 
@@ -30,7 +30,7 @@ cohort = "BLCA"
 tcga_participant_barcode = "TCGA-ZF-AA53"  # it is a BLCA patient barcode
 page.Size = 250
 sort_by =  "tcga_participant_barcode"
-obj = dn_miRSeq(mir, cohort, tcga_participant_barcode, sort_by, page.Size)
+obj = dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by)
 }
 \seealso{
 \code{dn_miRSeq} uses the service \code{\link{Samples.miRSeq}}, see \code{\link{FirebrowseR}}.

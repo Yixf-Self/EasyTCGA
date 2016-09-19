@@ -4,25 +4,33 @@
 \alias{dn_mRNASeq}
 \title{Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort. At least one gene must be supplied.}
 \usage{
-dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size,
+dn_mRNASeq(gene, cohort, tcga_participant_barcode, page.Size, sort_by,
   filename = NULL)
 }
 \arguments{
-\item{gene}{A character vector of gene symbols. At least one gene must be supplied. See \code{\link{mRNA_ID.R}} for available genes.}
+\item{gene}{A character vector of gene symbols. See \code{\link{mRNA_ID.R}} for available genes.}
 
 \item{cohort}{A character vector indicating cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.}
 
 \item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See e.g. \code{\link{patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
 
-\item{sort_by}{A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, gene, protocol and sample_type.}
-
 \item{page.Size}{Number of records per page. Usually max is 2000. For cancers with small number of patients use a small page.Size, e.g. page.Size = 250.}
+
+\item{sort_by}{A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, gene, protocol and sample_type.}
 }
 \value{
 data.frame of log2 mRNASeq expression values.
 }
 \description{
 Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort. At least one gene must be supplied.
+}
+\examples{
+gene = "AAAS" # "=mRNA_ID[10]"
+cohort = "ESCA"
+tcga_participant_barcode = c("TCGA-2H-A9GF", "TCGA-LN-A49M") # esca patient barcodes
+sort_by = "gene"
+page.Size = 250
+obj = dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size2)
 }
 \seealso{
 \code{dn_mRNASeq} uses the service \code{\link{Samples.mRNASeq}}, see \code{\link{FirebrowseR}}.

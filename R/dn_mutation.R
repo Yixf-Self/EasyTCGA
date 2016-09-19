@@ -23,9 +23,7 @@ require("plyr")
 #' sort_by = "gene"
 #' obj = dn_mutation.Exp(tcga_participant_barcode, cohort, gene, page.Size, sort_by)
 dn_mutation.Exp  = function(tcga_participant_barcode, cohort, gene, page.Size, sort_by, filename=NULL){
-  #
-  #cat("barcode =", tcga_participant_barcode, "cohort =", cohort, "gene =", gene, "size =", page.Size, "sort_by =", sort_by)
-  #cat(".")
+
   all.Found = F
   page.Counter = 1
   mut.Exp = list()

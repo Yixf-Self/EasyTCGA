@@ -18,7 +18,7 @@ require("plyr")
 #' gene = c("A1BG", "A1CF", "A2M")
 #' rank = ""
 #' cohort = "ACC"
-#' page.Size = 25
+#' page.Size = 20
 #' sort_by = "gene"
 #' obj = dn_mutation.SMG.Exp(gene, rank, cohort, page.Size, sort_by)
 dn_mutation.SMG.Exp  = function(gene, rank, cohort, page.Size, sort_by, filename=NULL){

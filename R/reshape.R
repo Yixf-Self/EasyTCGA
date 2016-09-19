@@ -14,7 +14,7 @@
 #' esca.miRSeq_reshaped = reshape.miRSeq (esca.miRSeq, sample_type = "TP")
 reshape.miRSeq = function(data, sample_type = "TP"){
 
-  cat("Info: the sample types of the data are:", unique(data$sample_type) )
+  cat("Info: the sample types of the data:", unique(data$sample_type) )
   data = subset(data, data$sample_type=="TP")
   idx = which(colnames(data)=='expression_log2')
   barcode = unique(data[,"tcga_participant_barcode"]) 
@@ -53,7 +53,7 @@ reshape.miRSeq = function(data, sample_type = "TP"){
 
 reshape.mRNASeq = function(data, sample_type = "TP"){
 
-  cat("Info: the sample types of the data are:", unique(data$sample_type))
+  cat("Info: the sample types of the data:", unique(data$sample_type))
   data = subset(data, data$sample_type=="TP")
   idx = which(colnames(data)=='expression_log2')
   barcode = unique(data[,"tcga_participant_barcode"])

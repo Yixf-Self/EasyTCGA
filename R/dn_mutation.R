@@ -16,7 +16,7 @@ require("plyr")
 #' @export
 #' @seealso \code{dn_mutation.Exp} uses the service \code{\link{Analyses.Mutation.MAF}}, see \code{\link{FirebrowseR}}.
 #' @examples
-#' tcga_participant_barcode = "TCGA-AG-A002" # a READ patient barcode
+#' tcga_participant_barcode = "TCGA-AG-A002" # TCGA patient barcode from READ
 #' cohort = "READ"
 #' gene = c("A1BG", "A1CF", "A2M")
 #' page.Size = 250
@@ -74,9 +74,8 @@ dn_mutation_cohort = function(cohort, page.Size, filename=NULL){
 
   cohort.mutation = list()
   cohort.clinical = dn_clinical_one(cohort)
- # dn_mutation.Exp  = function(tcga_participant_barcode, cohort, gene, page.Size, sort_by, filename=NULL){
 #   cohort.mutation = mclapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene", mc.cores=detectCores()/4)
-cohort.mutation = lapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene")
+  cohort.mutation = lapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene")
 
   if(is.null(cohort.mutation) || length(cohort.mutation)<1) {
     cohort.mutation = NULL

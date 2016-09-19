@@ -16,11 +16,6 @@ dn_cohorts = function( filename=NULL ){
   cohorts = Metadata.Cohorts( format = "csv", cohort = "" )
   cohorts = cohorts[,1]
 
-  #  if(is.null(filename)) {
-  #    filename = sprintf("cohorts.Rdata");
-  #  }
-  #  save(list=c("cohorts"), file=filename);
-
   return(cohorts)
 
 }

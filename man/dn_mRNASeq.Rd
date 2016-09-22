@@ -2,13 +2,13 @@
 % Please edit documentation in R/dn_mRNA.R
 \name{dn_mRNASeq}
 \alias{dn_mRNASeq}
-\title{Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort. At least one gene must be supplied.}
+\title{Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort.}
 \usage{
 dn_mRNASeq(gene, cohort, tcga_participant_barcode, page.Size, sort_by,
   filename = NULL)
 }
 \arguments{
-\item{gene}{A character vector of gene symbols. See \code{\link{mRNA_ID.R}} for available genes.}
+\item{gene}{A character vector of gene symbols. At least one gene must be supplied. See \code{\link{mRNA_ID.R}} for available genes.}
 
 \item{cohort}{A character vector indicating cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.}
 
@@ -22,12 +22,12 @@ dn_mRNASeq(gene, cohort, tcga_participant_barcode, page.Size, sort_by,
 data.frame of log2 mRNASeq expression values.
 }
 \description{
-Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort. At least one gene must be supplied.
+Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort.
 }
 \examples{
-gene = "AAAS" # "=mRNA_ID[10]"
+gene = "AAAS" 
 cohort = "ESCA"
-tcga_participant_barcode = c("TCGA-2H-A9GF", "TCGA-LN-A49M") # esca patient barcodes
+tcga_participant_barcode = c("TCGA-2H-A9GF", "TCGA-LN-A49M") #  TCGA patient barcodes from ESCA
 sort_by = "gene"
 page.Size = 250
 obj = dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size2)

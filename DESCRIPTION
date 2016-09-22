@@ -11,5 +11,5 @@ Depends:
     parallel
 LazyData: TRUE
 RoxygenNote: 5.0.1
-Imports: FirebrowseR
+Imports: FirebrowseR, plyr
 Remotes: mariodeng/FirebrowseR

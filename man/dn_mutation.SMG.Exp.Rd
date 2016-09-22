@@ -27,7 +27,7 @@ Download significantly mutated genes, as scored by MutSig. Results may be filter
 gene = c("A1BG", "A1CF", "A2M")
 rank = ""
 cohort = "ACC"
-page.Size = 25
+page.Size = 20
 sort_by = "gene"
 obj = dn_mutation.SMG.Exp(gene, rank, cohort, page.Size, sort_by)
 }

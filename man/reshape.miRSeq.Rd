@@ -11,14 +11,18 @@ reshape.miRSeq(data, sample_type = "TP")
 \item{data}{data.frame of log2 miRSeq expression values. See \code{\link{dn_miRSeq}} for downloading these values.}
 }
 \value{
-nxp-matrix, n = number of patients, p = number of mirs, (matrix(i,j))_{i,j} =  (expression\_log2)_{ij}, where data$tcga_participant_barcode==barcode[i], data$mir==mir[j], i=1,..,n, j=1,...,p
+nxp-matrix, n = number of patients, p = number of mirs, \cr
+        (matrix(i,j))_{i,j} =  (expression_log2)_{ij}, where \cr
+        data$tcga_participant_barcode==barcode[i], data$mir==mir[j], \cr
+        i=1,..,n, j=1,...,p
 }
 \description{
 Reshape sample-level log2 miRSeq expression values of the sample type TP. Primarily this service is intended to reshape all sample-level log2 miRSeq expression values of one cohort.
 See \code{\link{dn_miRSeq_cohort}}.
 }
 \examples{
-cohort = "ESCA"
+ 
+cohort = "ESCA"     
 page_size = 2000
 esca.miRSeq = dn_miRSeq_cohort(cohort, page.Size)
 esca.miRSeq_reshaped = reshape.miRSeq (esca.miRSeq, sample_type = "TP")

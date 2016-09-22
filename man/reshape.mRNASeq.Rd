@@ -11,7 +11,10 @@ reshape.mRNASeq(data, sample_type = "TP")
 \item{data}{data.frame of log2 mRNASeq expression values. See \code{\link{dn_mRNASeq}} for downloading these values.}
 }
 \value{
-nxp-matrix, n = number of patients, p = number of genes, (matrix(i,j))_{i,j} = ((data$tcga_participant_barcode==barcode[i], data$gene==gene[j]))_{i,j}
+nxp-matrix, n = number of patients, p = number of genes, \cr
+        (matrix(i,j))_{i,j} = (matrix(i,j))_{i,j} =  (expression_log2)_{ij}, where \cr
+        data$tcga_participant_barcode==barcode[i], data$gene==gene[j], \cr
+        i=1,..,n, j=1,...,p
 }
 \description{
 Reshape sample-level log2 mRNASeq expression values of the sample type TP. Primarily this service is intended to reshape all sample-level log2 mRNASeq expression values of one cohort.

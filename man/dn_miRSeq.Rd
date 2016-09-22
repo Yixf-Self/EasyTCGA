@@ -2,13 +2,13 @@
 % Please edit documentation in R/dn_miRNA.R
 \name{dn_miRSeq}
 \alias{dn_miRSeq}
-\title{Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode. At least one miR must be supplied.}
+\title{Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode.}
 \usage{
 dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by,
   filename = NULL)
 }
 \arguments{
-\item{mir}{A character vector containing miR names. See \code{\link{miRNA_ID.R}} for available miR names.}
+\item{mir}{A character vector containing miR names. At least one mir must be supplied. See \code{\link{miRNA_ID.R}} for available miR names.}
 
 \item{cohort}{A character vector containing the cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.}
 
@@ -22,12 +22,12 @@ dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by,
 data.frame of log2 miRSeq expression values.
 }
 \description{
-Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode. At least one miR must be supplied.
+Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode.
 }
 \examples{
 mir = miRNA_ID[1:10]
 cohort = "BLCA"
-tcga_participant_barcode = "TCGA-ZF-AA53"  # it is a BLCA patient barcode
+tcga_participant_barcode = "TCGA-ZF-AA53"  # TCGA patient barcode from BLCA
 page.Size = 250
 sort_by =  "tcga_participant_barcode"
 obj = dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by)

@@ -7,10 +7,10 @@ require("plyr")
 
 
 #' Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort.
-#' @param gene A character vector of gene symbols. At least one gene must be supplied. See \code{\link{mRNA_ID.R}} for available genes.
+#' @param gene A character vector of gene symbols, empty string or gene = mRNA_ID queries all genes. At least one gene must be supplied. See \code{\link{mRNA_ID.R}} for available genes.
 #' @param cohort A character vector indicating cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.
-#' @param tcga_participant_barcode A character vector containing TCGA barcodes, empty string queries all barcodes. See e.g. \code{\link{patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.
-#' @param page.Size Number of records per page. Usually max is 2000. For cancers with small number of patients use a small page.Size, e.g. page.Size = 250.
+#' @param tcga_participant_barcode A character vector containing TCGA barcodes, empty string queries all barcodes. See e.g. \code{\link{patient_barcodes}} for available barcodes. Remark that the data can be NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.
+#' @param page.Size Number of records per page. Usually max is 2000. 
 #' @param sort_by A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, gene, protocol and sample_type.
 #' @return data.frame of log2 mRNASeq expression values.
 #' @export
@@ -29,11 +29,16 @@ dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, page.Size, sort_by
   mRNA.Exp = list()
 
   while(all.Found == F){
-    tmp = Samples.mRNASeq(format = "csv", gene = gene, cohort = cohort,
-                          tcga_participant_barcode = tcga_participant_barcode, sample_type = "", protocol = "RSEM",
-                          page = page.Counter, page_size = page.Size, sort_by = sort_by)
+  #  tmp = Samples.mRNASeq(format = "csv", gene = gene, cohort = cohort,
+  #                       tcga_participant_barcode = tcga_participant_barcode, sample_type = "", protocol = "RSEM",
+  #                        page = page.Counter, page_size = page.Size, sort_by = sort_by)
 
-    if( is.null(tmp)==TRUE) {tmp = NULL; break;}
+    tmp = tryCatch( Samples.mRNASeq(format = "csv", gene = gene, cohort = cohort,
+                                    tcga_participant_barcode = tcga_participant_barcode, 
+                                    sample_type = "", protocol = "RSEM", page = page.Counter, 
+                                    page_size = page.Size, sort_by = sort_by) , error=function(e) NULL)
+    
+    if(is.null(tmp)==TRUE || length(tmp)<1) { tmp = NULL; as.data.frame(tmp); break; }
 
     mRNA.Exp[[page.Counter]] = tmp
 
@@ -50,6 +55,7 @@ dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, page.Size, sort_by
 
   if(length(mRNA.Exp) < 1) {
     mRNA.Exp = NULL
+    as.data.frame(mRNA.Exp)
   } else{
     mRNA.Exp = do.call(rbind.fill, mRNA.Exp)
   }
@@ -64,7 +70,7 @@ dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, page.Size, sort_by
 #' Download all available sample-level log2 mRNASeq expression values of one cohort.
 #' @param mRNA_ID A character vector containing gene symbols. See \code{\link{mRNA_ID.R}} for available gene symbols.
 #' @param cohort A character vector containing the cohort to query. See \code{\link{dn_cohorts}} for available cohorts.
-#' @param page.Size Number of records per page. Usually max is 2000. For cancers with small number of patients use a small page.Size, e.g. page.Size = 250.
+#' @param page.Size Number of records per page. Usually max is 2000. 
 #' @return data.frame of sample-level log2 mRNASeq expression values of the specified cohort.
 #' @export
 #' @seealso \code{dn_mRNASeq_cohort} uses the service \code{\link{dn_mRNASeq}}.

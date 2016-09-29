@@ -7,9 +7,9 @@ require("plyr")
   
 
 #' Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode.
-#' @param mir A character vector containing miR names. At least one mir must be supplied. See \code{\link{miRNA_ID.R}} for available miR names.
+#' @param mir A character vector containing miR names, empty string or mir=miRNA_ID queries all mirs. At least one mir must be supplied. See \code{\link{miRNA_ID.R}} for available miR names.
 #' @param cohort A character vector containing the cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.
-#' @param tcga_participant_barcode A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.
+#' @param tcga_participant_barcode A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{patient_barcodes}} for available barcodes. Remark that the data can be NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.
 #' @param page.Size Number of records per page. Usually max is 2000.
 #' @param sort_by A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, tool, mir and sample_type.
 #' @return data.frame of log2 miRSeq expression values.
@@ -33,7 +33,7 @@ dn_miRSeq = function(mir, cohort, tcga_participant_barcode, page.Size, sort_by, 
                          tcga_participant_barcode = tcga_participant_barcode, tool = "miRseq_Mature_Preprocess", sample_type = "",
                          page = page.Counter, page_size = page.Size, sort_by = sort_by)
 
-    if( is.null(tmp)==TRUE) { tmp = NULL; break; }
+    if(is.null(tmp)==TRUE || length(tmp)<1) { tmp = NULL; as.data.frame(tmp); break; }
 
     mir.Exp[[page.Counter]] = tmp
 
@@ -50,6 +50,7 @@ dn_miRSeq = function(mir, cohort, tcga_participant_barcode, page.Size, sort_by, 
 
   if(length(mir.Exp)<1) {
     mir.Exp = NULL
+    as.data.frame(mir.Exp)
   } else{
     mir.Exp = do.call(rbind.fill, mir.Exp)
   }

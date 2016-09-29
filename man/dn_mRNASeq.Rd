@@ -8,11 +8,11 @@ dn_mRNASeq(gene, cohort, tcga_participant_barcode, page.Size, sort_by,
   filename = NULL)
 }
 \arguments{
-\item{gene}{A character vector of gene symbols. At least one gene must be supplied. See \code{\link{mRNA_ID.R}} for available genes.}
+\item{gene}{A character vector of gene symbols, empty string or gene = mRNA_ID queries all genes. At least one gene must be supplied. See \code{\link{mRNA_ID.R}} for available genes.}
 
 \item{cohort}{A character vector indicating cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.}
 
-\item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See e.g. \code{\link{patient_barcodes}} for available barcodes. Remark that the data are NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
+\item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See e.g. \code{\link{patient_barcodes}} for available barcodes. Remark that the data can be NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
 
 \item{page.Size}{Number of records per page. Usually max is 2000. For cancers with small number of patients use a small page.Size, e.g. page.Size = 250.}
 

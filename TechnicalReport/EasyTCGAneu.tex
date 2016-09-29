@@ -1,6 +1,38 @@
 \documentclass{TechReport}
- \usepackage{listings}
+\usepackage{listings}
 \usepackage{color}
+\usepackage{courier}
+%\definecolor{mauve}{rgb}{0.88, 0.69, 1.0}
+\definecolor{burgundy}{rgb}{0.5, 0.0, 0.13}
+\definecolor{dkgreen}{rgb}{0.0, 0.5, 0.0}
+\definecolor{cardinal}{rgb}{0.77, 0.12, 0.23}
+\lstset{ %
+  language=R,                     % the language of the code
+  basicstyle=\small\ttfamily,       % the size of the fonts that are used for the code
+  numbers=left,                   % where to put the line-numbers
+  numberstyle=\tiny\color{gray},  % the style that is used for the line-numbers
+  stepnumber=0,                   % the step between two line-numbers. If it's 1, each line
+                                  % will be numbered
+  numbersep=5pt,                  % how far the line-numbers are from the code
+  backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+  showspaces=false,               % show spaces adding particular underscores
+  showstringspaces=false,         % underline spaces within strings
+  showtabs=false,                 % show tabs within strings adding particular underscores
+  frame=none,                   % adds a frame around the code
+  rulecolor=\color{black},        % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. commens (green here))
+  tabsize=2,                      % sets default tabsize to 2 spaces
+  captionpos=b,                   % sets the caption-position to bottom
+  breaklines=true,                % sets automatic line breaking
+  breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+  title=\lstname,                 % show the filename of files included with \lstinputlisting;
+                                  % also try caption instead of title
+  keywordstyle=\color{blue},      % keyword style
+  commentstyle=\color{dkgreen},   % comment style
+  stringstyle=\color{cardinal},      % string literal style
+  escapeinside={\%*}{*)},         % if you want to add a comment within your code
+  morekeywords={*,...}            % if you want to add more keywords to the set
+} 
+
 \usepackage{subfigure}
 \usepackage{url}
 \newcommand{\urlwofont}[1]
@@ -31,8 +63,8 @@
 % \end{figure}
 
 
-\title{EasyTCGA\\ An R package for easy batch downloading of TCGA data from FireBrowse}
-\author{Viktoria Kliewer, Sangkyun Lee}
+\title{EasyTCGA:\\ An R package for easy batch downloading of TCGA data from FireBrowse}
+\author{Viktoria Kliewer \& Sangkyun Lee}
 \date{09/2016}        %Serial Number/Year
 
 \begin{document}
@@ -92,7 +124,7 @@ Before downloading data with \texttt{\em FirebroweR} and \texttt{\em EasyTCGA} i
 recommandable to check if the data to query is available 
 on FireBrowse\footnotemark[4].\\
 
-\section{Approach \& Implementation of EasyTCGA}
+\section{Functionality of EasyTCGA}
 This section gives an overview of the R package \texttt{\em EasyTCGA} to acquaint
 the user with this package and to get started to use it.\\
 We will present the functions, some sensible steps and codes and the respective

@@ -14,7 +14,7 @@ dn_mRNASeq(gene, cohort, tcga_participant_barcode, page.Size, sort_by,
 
 \item{tcga_participant_barcode}{A character vector containing TCGA barcodes, empty string queries all barcodes. See e.g. \code{\link{patient_barcodes}} for available barcodes. Remark that the data can be NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.}
 
-\item{page.Size}{Number of records per page. Usually max is 2000. For cancers with small number of patients use a small page.Size, e.g. page.Size = 250.}
+\item{page.Size}{Number of records per page. Usually max is 2000.}
 
 \item{sort_by}{A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, gene, protocol and sample_type.}
 }

@@ -9,7 +9,7 @@ dn_mRNASeq_cohort(cohort, page.Size, filename = NULL)
 \arguments{
 \item{cohort}{A character vector containing the cohort to query. See \code{\link{dn_cohorts}} for available cohorts.}
 
-\item{page.Size}{Number of records per page. Usually max is 2000. For cancers with small number of patients use a small page.Size, e.g. page.Size = 250.}
+\item{page.Size}{Number of records per page. Usually max is 2000.}
 
 \item{mRNA_ID}{A character vector containing gene symbols. See \code{\link{mRNA_ID.R}} for available gene symbols.}
 }

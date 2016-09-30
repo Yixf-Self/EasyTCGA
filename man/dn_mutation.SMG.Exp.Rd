@@ -13,7 +13,7 @@ dn_mutation.SMG.Exp(gene, rank, cohort, page.Size, sort_by, filename = NULL)
 
 \item{cohort}{A character vector indicating the cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.}
 
-\item{page.Size}{Number of records per page. Usually max is 2000.}
+\item{page.Size}{Number of records per page. Usually max is 2000. For cancers with small number of patients use a small page.Size, e.g. page.Size = 250.}
 
 \item{sort_by}{A character indicating the column which is used for sorting. Data can be sorted by cohort, tool, gene and rank.}
 }

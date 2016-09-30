@@ -14,7 +14,7 @@ dn_mutation.Exp(tcga_participant_barcode, cohort, gene, page.Size, sort_by,
 
 \item{gene}{A character vector containing gene symbols, empty string queries all genes.}
 
-\item{page.Size}{Number of records per page. For downloading data of single barcodes or genes the page.Size should be chosen small, i.e. 25, but usually not larger than 1000.}
+\item{page.Size}{Number of records per page. Usually max is 2000. For cancers with small number of patients use rather a small page.Size, e.g. page.Size = 250.}
 
 \item{sort_by}{A character indicating the column which is used for sorting. The data can be sorted by tcga_participant_barcode, cohort, tool and gene.}
 

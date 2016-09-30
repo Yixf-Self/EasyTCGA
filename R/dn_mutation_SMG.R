@@ -31,7 +31,7 @@ dn_mutation.SMG.Exp  = function(gene, rank, cohort, page.Size, sort_by, filename
     tmp = Analyses.Mutation.SMG(format = "csv", cohort = cohort, tool = "MutSig2CV", rank = rank, gene = gene, q = "",
                                 page = page.Counter, page_size = page.Size, sort_by = sort_by)
 
-    if( s.null(tmp)==TRUE || length(tmp)<1) { tmp = NULL; as.data.frame(tmp); break; }
+    if( is.null(tmp)==TRUE || length(tmp)<1) { tmp = NULL; as.data.frame(tmp); break; }
 
     mut.Exp[[page.Counter]] = tmp
 

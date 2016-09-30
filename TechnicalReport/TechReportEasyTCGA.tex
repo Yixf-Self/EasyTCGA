@@ -89,7 +89,7 @@ the objective of getting the TCGA data from FireBrowse conveniently.
 The size of record sets to download is limited. \texttt{\em EasyTCGA}
 is an R package providing easy batch downloading of particular TCGA
 data from FireBrowse using \texttt{\em FirebrowseR}. The key advantage
-of EasyTCGA is the downloading of the whole available
+of \texttt{\em EasyTCGA} is the downloading of the whole available
 data set you are interested in at once as a single data frame.
 
 The focus of this technical report is on the presentation of the R
@@ -114,7 +114,7 @@ Before downloading data with \texttt{\em FirebroweR} and \texttt{\em EasyTCGA}, 
 recommandable to check if the data to query is available 
 on FireBrowse\footnotemark[4].\\
 
-\section{Functionality of EasyTCGA}
+\section{Functionality of \texttt{\em EasyTCGA}}
 This section gives an overview of the R package \texttt{\em EasyTCGA} to acquaint
 the user with this package and to get started to use it.
 We will present the functions, some sensible steps and codes and the respective
@@ -128,7 +128,7 @@ First, load the \texttt{\em EasyTCGA} package:
 All packages required for this package, including how to install \texttt{\em
   FirebrowseR}, are loaded automatically. 
 Note that entries in the downloaded data frame can be "NA", "None", empty or the output is even
-"NULL" if the data for your query is incomplete or there is none.\\
+"NULL" if the data for your query is incomplete or there is none.
 
 \subsection{Clinical data}
 To deal with clinical data, we have functions in $dn\_clinical.R$.
@@ -152,14 +152,13 @@ The command
 outputs a character vector containing all TCGA cohort abbreviations
 which are relevant for the algorithms. Use the function
 $dn\_clinical\_one$ to download all available clinical data of a
-single cohort. Specify the input argument {\tt cohort}, e.g. BRCA
-(Breast invasive carcinoma):
+single cohort. Specify the input argument {\tt cohort}, e.g. BRCA:
 \begin{lstlisting}[style=base]
 @> cohort = "BRCA"
 > brca.clinical = dn_clinical_one(cohort)@
 \end{lstlisting}
-At present, {\tt brca.clinical} is a data frame of 1097 observations (patients)
-and 111 variables, these are clinical data elements (CDEs) like 
+At present, the {\tt brca.clinical} is a data frame of 1097 observations (patients)
+and a11 variables, these are clinical data elements (CDEs) like 
 gender, age, race, duration of the illness and biological data. All available CDEs
 can be downloaded as a character vector using the 
 function $Metadata.ClinicalNames$ of \texttt{\em FirebrowseR}:
@@ -167,7 +166,7 @@ function $Metadata.ClinicalNames$ of \texttt{\em FirebrowseR}:
 @> clinical.names = Metadata.ClinicalNames(format = "csv")@
 \end{lstlisting}
 An extract of the data frame {\tt brca.clinical} querring information about the CDEs
-{\tt tcga\_participant\_barcode, days\_to\_birth and bcra\_canonical\_reason}:
+{\tt tcga\_participant\_barcode, days\_to\_birth} and {\tt bcra\_canonical\_reason}:
 \begin{lstlisting}[style=base]
 @> brca.clinical[1:3, c("tcga_participant_barcode", "days_to_bi-
 rth", "bcr_canonical_reason")]
@@ -176,7 +175,6 @@ rth", "bcr_canonical_reason")]
 2             TCGA-3C-AALI         -18538                  <NA>
 3             TCGA-3C-AALJ         -22848                  <NA>@
 \end{lstlisting}
-\ 
 There is also a possibility of downloading clinical data of multiple cohorts or all
 available clinical data as a single data frame
 applying the function $dn\_clinical$. The command
@@ -195,31 +193,26 @@ data, as {\tt brca.clinical} or {\tt all.clinical}, use
 \subsection{Sample-level log2 miRSeq and mRNASeq data}
 This section presents the approach of the files:
 \begin{itemize}
-\item $dn\_miRNA.R$, containing the functions
-  \begin{itemize}
-  \item $dn\_miRSeq$: ??
-  \item $dn\_miRSeq\_cohort$: ??
-  \end{itemize}
-\item $dn\_mRNA.R$, containing the functions
-  \begin{itemize}
-  \item $dn\_mRNASeq$ and $dn\_mRNASeq\_cohort$.
-  \end{itemize}
+\item $dn\_miRNA.R$, consisting of $dn\_\{miRSeq,\ miRSeq\_cohort\}$
+\item $dn\_mRNA.R$, consisting of $dn\_\{mRNASeq,\ mRNASeq\_cohort\}$
 \end{itemize}
 
 All data frames of sample-level log2 miRSeq data provide information
-about the variables {\tt tcga\_participant\_barcode}, {\tt mir} (a
-micro ribonucleic acid, miRNA ), {\tt expression\_log2}, {\tt tool},
+about the variables {\tt tcga\_participant\_barcode, mir} (a
+micro ribonucleic acid, miRNA ), {\tt expressi-\\ on\_log2}, {\tt tool},
 {\tt cohort}, {\tt sample\_type} and {\tt date}. The variables of
 sample-level log2 mRNASeq data are {\tt tcga\_participant\_barcode,
   gene} (messenger RNA, mRNA), {\tt expression\_log2}, {\tt z.score},
 {\tt cohort}, {\tt sample\_type},
-{\tt protocol} and {\tt geneID}.\\
+{\tt protocol} and {\tt geneID} (mRNA).
+
 The function $Metadata.SampleTypes$ of \texttt{\em FirebrowseR}
 returns all TCGA sample type codes, both numeric and symbolic.
 \begin{lstlisting}[style=base]
 @> sample.types = Metadata.SampleTypes(format = "csv")@
  \end{lstlisting}
- We download data of all sample types available.\\
+ We download data of all sample types available.
+ 
  There are the R files $miRNA\_ID.R$ and $mRNA\_ID.R$ which provide
  all available mirs and genes. The ID's are as follows:
 \begin{lstlisting}[style=base]
@@ -278,8 +271,7 @@ outputs a data frame of all available sample-level log2 miRSeq expression values
 the cohort TGCT.
 
 The functions of $dn\_miRNA.R$ and $dn\_mRNA.R$ are constructed analogously.
-%Therefore we limit the presentation to the download of sample-level 
-%log2 miRSeq expression values. 
+
 
 \subsubsection{Reshape}
 The log2 expression values, variable {\tt expression\_log2}, corresponding to a
@@ -287,13 +279,14 @@ patient barcode and a mir is the most important information provided by
 the sample-level log2 miRSeq and mRNASeq data. This consideration resulted in the
 development of reshaping algorithms for these data types.
 
-The file $reshape.R$ contains the functions $reshape.\{miRSeq, mRNASeq\}$
+The file $reshape.R$ contains the functions $reshape.\{miRSeq,\ mRNASeq\}$
 used to reshape sample-level log2 miRSeq and mRNASeq 
 expression values of the sample type TP. I.e., first use the functions from 
 $dn\_miRNA.R$ or $dn\_mRNA.R$ to download the input parameter {\tt data}
-of $reshape.miRSeq$ or $reshape.mRNASeq$ before reshaping. \\
+of $reshape.miRSeq$ or $reshape.mRNASeq$ before reshaping. 
+
 The function $reshape.miRSeq$ with the input parameter {\tt data} return a
-$nxp$-matrix $M = (m_{ij})_{i=1,..,n, j=1,...,p}$, \ $n$ = number of patients and 
+$nxp$-matrix $M = (m_{ij})_{i=1,..,n, j=1,...,p}$, $n$ = number of patients and 
 $p$ = number of mirs, rownames of the matrix correspond to the patients, colnames
 correspond to the mirs,  so the following applies
 \begin{center}
@@ -301,7 +294,8 @@ $m_{ij}= (expression\_log2)_{ij}$\ \  where \\
 $data\$tcga\_participant\_barcode==barcode[i]\ \  \wedge\ \ data\$mir==mir[j] $
 \end{center}
 Primarily this service is intended to reshape all sample-level log2 miRSeq
-expression values of one cohort. \\
+expression values of one cohort. 
+
 Specify the {\tt cohort} to query, e.g. TGCT, download all available sample-level
 log2 miRSeq expression values of this cohort, as described 
 in 2.2.
@@ -316,7 +310,7 @@ Reshape the data frame {\tt tgct.miRSeq} as follows
 > tgct.miRSeq_reshaped = reshape.miRSeq (data, 
 sample_type = "TP")
 \end{lstlisting}
-A small subset of {\tt tgct.miRSeq\_reshaped}:
+A small subset of the {\tt tgct.miRSeq\_reshaped}:
 \begin{lstlisting}[style=base]
 @> tgct.miRSeq_reshaped
          row.names        hsa-let-7a-2-3p      hsa-let-7a-3p
@@ -331,19 +325,21 @@ $reshape.mRNASeq$ is built in the exact same manner as $reshape.miRSeq$.
 
 
 \subsection{Selected columns from the MAF generated by MutSig}
-The file $dn\_mutation.R$ of GitHub provides the download of selected
-columns from the MAF generated by MutSig. This file consists of the
-functions $dn\_mutation.Exp$ and $dn\_mutation\_cohort$. All data
+The file $dn\_mutation.R$ provides the download of selected
+columns from the MAF generated by MutSig. It consists of the
+functions $dn\_\{mutation.Exp,\ dn\_mutation\_cohort\}$. All data
 frames of selected columns from the MAF generated by MutSig mainly
 provide information about the variables {\tt Hugo\_Symbol
-  (= gene), Variant\_Type, Variant\_Classification, Protein\_Change, SwissProt\_entry\_Id}, \\
-{\tt Tumor\_Sample\_Barcode (= patient barcode), tool} and {\tt
+  (= gene), Variant\_Type, Variant\_Classification, Protein\_Change, SwissProt\_entry\_Id},
+{\tt Tumo-\\ r\_Sample\_Barcode (= patient barcode), tool} and {\tt
   cohort}. All variables can be seen at
-\url{http://firebrowse.org/api-docs/#!/Metadata/MAFColNames}.\\
+\url{http://firebrowse.org/api-docs/#!/Metadata/MAFColNames}.
+
 As for other data types the first function is intended to download
 rather small data whereas the second function is a service for
 downloading all available selected
-columns from the MAF generated by MutSig for one cohort.\\
+columns from the MAF generated by MutSig for one cohort.
+
 Using $dn\_mutation.Exp$ you can query data for single or multiple
 input arguments, namely {\tt genes, cohorts, barcodes} and {\tt
   tools}. You have to specify at least one {\tt gene} or {\tt barcode}
@@ -373,11 +369,12 @@ Hugo_Symbol Variant_Type Variant_Classification    Protein_Change
 2         2MG_HUMAN  TCGA-AG-A002-01A-01W-A00K-09  MutSig2CV    READ
 3        A2MG_HUMAN  TCGA-AG-A002-01A-01W-A00K-09  MutSig2CV    READ     
 \end{lstlisting}
- If you would like to download all available data for one cohort, use  
+ If you like to download all available data for one cohort, use  
 $dn\_mutation\_cohort$ with input parameters {\tt cohort} and {\tt page.Size}. 
 You can also download this data applying $dn\_mutation.Exp$ just specifying 
 a {\tt cohort}. But the download by means of $dn\_mutation\_cohort$ 
-is much faster as applying $dn\_mutation.Exp$. \\
+is much faster as applying $dn\_mutation.Exp$. 
+
 An example how to use $dn\_mutation\_cohort$:
 \begin{lstlisting}[style=base]
 @> cohort = "READ"
@@ -389,9 +386,9 @@ An example how to use $dn\_mutation\_cohort$:
 
 \subsection{Significantly mutated genes, as scored by MutSig}
 The file $dn\_mutation\_SMG.R$ provides significantly mutated genes,
-as scored by MutSig. This file is structured in the same way as other
-services. It consists of the functions $dn\_mutation.SMG.Exp$ and
-$dn\_mutation.SMG\_cohort$. The service $dn\_mutation.SMG.Exp$ with
+as scored by MutSig. It is structured in the same way as other
+services. The file consists of the functions $dn\_\{mutation.SMG.Exp,\ mutation.SMG\_cohort\}$. 
+$dn\_mutation.SMG.Exp$ with
 input arguments {\tt gene, rank, cohort, page.Size} and {\tt sort\_by}
 returns data for rather small specific querries, the service
 $dn\_mutation.SMG\_cohort$ with input parameters {\tt cohort} and {\tt
@@ -415,7 +412,7 @@ gene   cohort                        longname          p sample_type
 2 A1CF    ACC  APOBEC1 complementation factor  1.0000000          TP
 3  A2M    ACC           alpha-2-macroglobulin  1.0000000          TP
 \end{lstlisting}
-The data frame of all significantly mutated genes for one cancer, e.g. "PCPG", 
+The data frame of all significantly mutated genes for one cancer, e.g. PCPG, 
 can be downloaded as follows:
 \begin{lstlisting}[style=base]
 @> cohort = "PCPG"
@@ -429,7 +426,7 @@ can be downloaded as follows:
 \section{Example: Sample-level log2 miRSeq expression values in conjunction with the
 "glmnet" R Package}
 In this section we will analyse the sample-level log2 miRSeq expression values of
-the cancer "ACC" and show which
+the cancer adrenocortical carcinoma (ACC) and show which
 {\tt mirs (genes)} are selected with respect to the vital status (alive, dead) of
 the patients by applying the logistic 
 regression.
@@ -463,7 +460,7 @@ Then reshape {\tt acc.miRSeq} as described in 2.2.1:
 @> acc.miRSeq_reshaped = reshape.miRSeq(acc.miRSeq,sample_type="TP")@
 \end{lstlisting}
 Many matrix elements of {\tt acc.miRSeq\_reshaped} are NA's, these entries correspond
-to the mirs whose log2 miRSeq expression values are "None", see the data frame {\tt acc.miRSeq. }
+to the mirs whose log2 miRSeq expression values are "None", see {\tt acc.miRSeq}.
  As "glmnet" cannot deal with NA's, for purposes of demonstration we remove all columns containing NA's
 from {\tt acc.miRSeq\_reshaped} and store the resulting matrix as {\tt X}
 \begin{lstlisting}[style=base]
@@ -483,25 +480,22 @@ and the filtered barcodes from {\tt acc.label}, see STEP1 and STEP2 in the code 
 > idx = match(barcode, names(y)) # STEP1
 > y = y[idx,drop=FALSE] # STEP2
 \end{lstlisting}
-Now the preparation for "glmnet" is done and the actual analysis can be performed.\\
-First, apply "glmnet" without cross-validation to $X$ and $y$ and plot the result 
-to illustrate the change of the coefficients, see Figure 1. Repeat these steps in conjuction with
-cross-validation, the plot is shown in Figure 2.
+Now the preparation for "glmnet" is done and the actual analysis can be performed. Apply "glmnet" 
+to $X$ and $y$ and plot the result to illustrate the change of the coefficients, 
+see the figure on the next page.
 \begin{lstlisting}[style=base]
-@> out1 = glmnet(X, y, family="binomial")
-> plot(out1)
-> out2 = cv.glmnet(X, y, family="binomial", intercept=FALSE)
-> plot(out2)
+> out = cv.glmnet(X, y, family="binomial", intercept=FALSE)
+> plot(out)
 \end{lstlisting}
 \begin{figure}[h!]
 \centering
-\includegraphics[]{Rplot1.png}
-\center{\caption{Plot without cross-validation}}
-\end{figure}
-\begin{figure}[h!]
-\centering
-\includegraphics[]{Rplot2.png}
-\center{\caption{Plot in conjunction with cross-validation}}
+% \includegraphics[]{Rplot1.png}
+% \center{\caption{Plot without cross-validation}}
+% \end{figure}
+% \begin{figure}[h!]
+% \centering
+\includegraphics[height=11.5cm]{cv_plot.pdf}
+%\center{\caption{Plot in conjunction with cross-validation}}
 \end{figure}
 The next steps deliver significant mirs.
 \begin{lstlisting}[style=base]
@@ -530,7 +524,7 @@ seems to play an important  role\footnote{\url{https://www.ncbi.nlm.nih.gov/pmc/
 
 
 \section{Conclusion}
-This technical report introduced the R package $EasyTCGA$ allowing
+This technical report introduced the R package \texttt{\em EasyTCGA} allowing
 easy batch downloading of particular data types of TCGA from
 FireBrowse mentioned in the introduction.  We presented all functions
 of the package and its applications. The package is quite easy to use,
@@ -543,8 +537,9 @@ since the FireBrowse service itself is not designed for batch
 downloading. Especially the download of all available data for a
 cohort can take some time. But this is primarily due to the Firebrowse
 API. Depending on the API being used, the service may return NULL
-although the data for your query is available.
-So whenever it happens, we recommend you to double check on FireBrowse website for data availability\footnote{\url{http://firebrowse.org/}}.
+although the data for your query is available.So whenever it happens, 
+we recommend you to double check on FireBrowse website
+for data availability\footnote{\url{http://firebrowse.org/}}.
 
 
 

@@ -38,7 +38,7 @@ dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, page.Size, sort_by
                                     sample_type = "", protocol = "RSEM", page = page.Counter, 
                                     page_size = page.Size, sort_by = sort_by) , error=function(e) NULL)
     
-    if(is.null(tmp)==TRUE || length(tmp)<1) { tmp = NULL; as.data.frame(tmp); break; }
+    if(is.null(tmp)==TRUE || length(tmp)<1) { tmp = NULL; mRNA.Exp = as.data.frame(tmp); break; }
 
     mRNA.Exp[[page.Counter]] = tmp
 
@@ -53,9 +53,9 @@ dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, page.Size, sort_by
     }
   }
 
-  if(length(mRNA.Exp) < 1) {
+  if(is.null(mRNA.Exp)==TRUE || length(mRNA.Exp) < 1) {
     mRNA.Exp = NULL
-    as.data.frame(mRNA.Exp)
+    mRNA.Exp = as.data.frame(mRNA.Exp)
   } else{
     mRNA.Exp = do.call(rbind.fill, mRNA.Exp)
   }
@@ -70,7 +70,7 @@ dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, page.Size, sort_by
 #' Download all available sample-level log2 mRNASeq expression values of one cohort.
 #' @param mRNA_ID A character vector containing gene symbols. See \code{\link{mRNA_ID.R}} for available gene symbols.
 #' @param cohort A character vector containing the cohort to query. See \code{\link{dn_cohorts}} for available cohorts.
-#' @param page.Size Number of records per page. Usually max is 2000. 
+#' @param page.Size Number of records per page. Usually max is 2000. page.Size should be chosen bigger than the number of patients of the cohort.
 #' @return data.frame of sample-level log2 mRNASeq expression values of the specified cohort.
 #' @export
 #' @seealso \code{dn_mRNASeq_cohort} uses the service \code{\link{dn_mRNASeq}}.
@@ -79,10 +79,12 @@ dn_mRNASeq = function(gene, cohort, tcga_participant_barcode, page.Size, sort_by
 #' page_size = 2000
 #' esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size2)
 dn_mRNASeq_cohort = function(cohort, page.Size, filename=NULL){
+  
+  cohort.mRNASeq = list()
 
-  cohort.mRNASeq = mclapply(mRNA_ID, dn_mRNASeq, cohort, "", page.Size, "gene", mc.cores=detectCores()/2)
+  cohort.mRNASeq = mclapply(mRNA_ID, dn_mRNASeq, cohort, "", page.Size, "gene", mc.cores=detectCores()/5)
 
-  if(length(cohort.mRNASeq)<1){
+  if(is.null(cohort.mRNASeq)==TRUE || length(cohort.mRNASeq)<1){
     cohort.mRNASeq = NULL
   } else{
     cohort.mRNASeq = do.call(rbind, cohort.mRNASeq)

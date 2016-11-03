@@ -29,11 +29,11 @@ dn_miRSeq = function(mir, cohort, tcga_participant_barcode, page.Size, sort_by, 
   mir.Exp = list()
 
   while(all.Found == F){
-    tmp = Samples.miRSeq(format = "csv", mir = mir, cohort = cohort,
+    tmp = tryCatch(Samples.miRSeq(format = "csv", mir = mir, cohort = cohort,
                          tcga_participant_barcode = tcga_participant_barcode, tool = "miRseq_Mature_Preprocess", sample_type = "",
-                         page = page.Counter, page_size = page.Size, sort_by = sort_by)
+                         page = page.Counter, page_size = page.Size, sort_by = sort_by), error=function(e) NULL)
 
-    if(is.null(tmp)==TRUE || length(tmp)<1) { tmp = NULL; as.data.frame(tmp); break; }
+    if(is.null(tmp)==TRUE || length(tmp)<1) { tmp = NULL; mir.Exp = as.data.frame(tmp); break; }
 
     mir.Exp[[page.Counter]] = tmp
 
@@ -48,9 +48,9 @@ dn_miRSeq = function(mir, cohort, tcga_participant_barcode, page.Size, sort_by, 
     }
   }
 
-  if(length(mir.Exp)<1) {
+  if(is.null(mir.Exp)==TRUE || length(mir.Exp)<1) {
     mir.Exp = NULL
-    as.data.frame(mir.Exp)
+    mir.Exp = as.data.frame(mir.Exp)
   } else{
     mir.Exp = do.call(rbind.fill, mir.Exp)
   }
@@ -64,7 +64,7 @@ dn_miRSeq = function(mir, cohort, tcga_participant_barcode, page.Size, sort_by, 
 
 #' Download all available sample-level log2 miRSeq expression values of one cohort.
 #' @param cohort A character vector indicating the cohort to query. See \code{\link{dn_cohorts}} for available cohorts.
-#' @param page.Size Number of records per page. Usually max is 2000.
+#' @param page.Size Number of records per page. Usually max is 2000. page.Size should be chosen bigger than the number of patients of the cohort.
 #' @return data.frame of sample-level log2 miRSeq expression values of the specified cohort.
 #' @export
 #' @seealso \code{dn_miRSeq_cohort} uses the service \code{\link{dn_miRSeq}}.
@@ -76,9 +76,9 @@ dn_miRSeq_cohort = function(cohort, page.Size, filename=NULL){
 
   cohort.miRSeq = list()
 
-  cohort.miRSeq = mclapply(miRNA_ID, dn_miRSeq, cohort, "", page.Size, "mir", mc.cores=detectCores()/2)
+  cohort.miRSeq = mclapply(miRNA_ID, dn_miRSeq, cohort, "", page.Size, "mir", mc.cores=detectCores()/4)
 
-  if (length(cohort.miRSeq) < 1){
+  if (is.null(cohort.miRSeq)==TRUE || length(cohort.miRSeq) < 1){
     cohort.miRSeq = NULL
   } else{
     cohort.miRSeq= do.call(rbind.fill, cohort.miRSeq)

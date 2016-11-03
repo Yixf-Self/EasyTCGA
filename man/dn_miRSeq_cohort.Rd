@@ -9,7 +9,7 @@ dn_miRSeq_cohort(cohort, page.Size, filename = NULL)
 \arguments{
 \item{cohort}{A character vector indicating the cohort to query. See \code{\link{dn_cohorts}} for available cohorts.}
 
-\item{page.Size}{Number of records per page. Usually max is 2000.}
+\item{page.Size}{Number of records per page. Usually max is 2000. page.Size should be chosen bigger than the number of patients of the cohort.}
 }
 \value{
 data.frame of sample-level log2 miRSeq expression values of the specified cohort.

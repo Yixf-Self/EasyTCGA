@@ -41,7 +41,7 @@ dn_mutation.Exp  = function(tcga_participant_barcode, cohort, gene, page.Size, s
                                          page = page.Counter,
                                          page_size = page.Size, sort_by = sort_by), error=function(e) NULL)
 
-    if(is.null(tmp)==TRUE || length(tmp)<1) {tmp = NULL; as.data.frame(tmp); break;}
+    if(is.null(tmp)==TRUE || length(tmp)<1) {tmp = NULL; mut.Exp = as.data.frame(tmp); break;}
     
     mut.Exp[[page.Counter]] = tmp
 
@@ -56,9 +56,9 @@ dn_mutation.Exp  = function(tcga_participant_barcode, cohort, gene, page.Size, s
     }
   }
 
-  if(length(mut.Exp)<1) {
+  if(is.null(mut.Exp)==TRUE ||length(mut.Exp)<1) {
     mut.Exp = NULL
-    as.data.frame(mut.Exp)
+    mut.Exp = as.data.frame(mut.Exp)
   } else{
     mut.Exp = rbind.fill(mut.Exp)
   }
@@ -80,11 +80,12 @@ dn_mutation.Exp  = function(tcga_participant_barcode, cohort, gene, page.Size, s
 #' cohort = "READ"
 #' page.Size = 1000
 #' tool = "MutSig2CV"
-#' read.mutation = dn_mutation_cohort(cohort, page.Size)
+#' read.mutation = dn_mutation_cohort(cohort, page.Size, tool)
 dn_mutation_cohort = function(cohort, page.Size, tool, filename=NULL){
 
   cohort.mutation = list()
   cohort.clinical = dn_clinical_one(cohort)
+  
   cohort.mutation = mclapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene", tool, mc.cores=detectCores()/2)
  # cohort.mutation = lapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene")
 

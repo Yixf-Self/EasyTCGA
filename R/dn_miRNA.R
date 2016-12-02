@@ -76,7 +76,7 @@ dn_miRSeq_cohort = function(cohort, page.Size, filename=NULL){
 
   cohort.miRSeq = list()
 
-  cohort.miRSeq = mclapply(miRNA_ID, dn_miRSeq, cohort, "", page.Size, "mir", mc.cores=detectCores()/4)
+  cohort.miRSeq = mclapply(miRNA_ID, dn_miRSeq, cohort, "", page.Size, "mir", mc.cores=detectCores()/10)
 
   if (is.null(cohort.miRSeq)==TRUE || length(cohort.miRSeq) < 1){
     cohort.miRSeq = NULL

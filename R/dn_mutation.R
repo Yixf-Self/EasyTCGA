@@ -86,7 +86,7 @@ dn_mutation_cohort = function(cohort, page.Size, tool, filename=NULL){
   cohort.mutation = list()
   cohort.clinical = dn_clinical_one(cohort)
   
-  cohort.mutation = mclapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene", tool, mc.cores=detectCores()/2)
+  cohort.mutation = mclapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene", tool, mc.cores=detectCores()/10)
  # cohort.mutation = lapply(cohort.clinical[,1], dn_mutation.Exp, cohort, "", page.Size, "gene")
 
   if(is.null(cohort.mutation) || length(cohort.mutation)<1) {

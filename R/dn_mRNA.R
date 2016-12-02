@@ -82,7 +82,7 @@ dn_mRNASeq_cohort = function(cohort, page.Size, filename=NULL){
   
   cohort.mRNASeq = list()
 
-  cohort.mRNASeq = mclapply(mRNA_ID, dn_mRNASeq, cohort, "", page.Size, "gene", mc.cores=detectCores()/5)
+  cohort.mRNASeq = mclapply(mRNA_ID, dn_mRNASeq, cohort, "", page.Size, "gene", mc.cores=detectCores()/10)
 
   if(is.null(cohort.mRNASeq)==TRUE || length(cohort.mRNASeq)<1){
     cohort.mRNASeq = NULL

@@ -80,8 +80,9 @@ dn_mutation.SMG_cohort = function(cohort, gene_ID, page.Size, filename=NULL){
 
   mut.cohort = list()
                              
-  # mut.cohort = mclapply(gene_ID, dn_mutation.SMG.Exp, "", cohort, page.Size, "gene", mc.cores=detectCores()/4)
-  mut.cohort = lapply(gene_ID, dn_mutation.SMG.Exp, "", cohort, page.Size, "gene")
+  mut.cohort = mclapply(gene_ID, dn_mutation.SMG.Exp, "", cohort, page.Size, "gene", mc.cores=detectCores()/10)
+  # mut.cohort = lapply(gene_ID, dn_mutation.SMG.Exp, "", cohort, page.Size, "gene")
+  
   if( is.null(mut.cohort) || length(mut.cohort)<1) {
     mut.cohort = NULL
   } else{

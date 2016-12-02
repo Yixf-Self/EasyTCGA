@@ -66,7 +66,7 @@ reshape.mRNASeq = function(data, sample_type = "TP"){
 
    # fill in column by column:
   for (j in 1:p) {
-    matrix[,j] =  as.numeric(data[(data$mir==mir[j]), idx])
+    matrix[,j] =  as.numeric(data[(data$gene==gene[j]), idx])
   }
 
   return(matrix)

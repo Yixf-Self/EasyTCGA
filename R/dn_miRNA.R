@@ -6,7 +6,8 @@ require("plyr")
 
   
 
-#' Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode.
+#' Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode. If the 
+#' output in an empty data.frame or there is a warning message, try again later and double check on \code{\link{http://firebrowse.org/api-docs/#!/Samples/miRSeq}} for data availability.
 #' @param mir A character vector containing miR names, empty string or mir=miRNA_ID queries all mirs. At least one mir must be supplied. See \code{\link{miRNA_ID.R}} for available miR names.
 #' @param cohort A character vector containing the cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.
 #' @param tcga_participant_barcode A character vector containing TCGA barcodes, empty string queries all barcodes. See \code{\link{patient_barcodes}} for available barcodes. Remark that the data can be NULL for barcode(s) which isn´t (aren´t) barcode(s) of the specified cohort.

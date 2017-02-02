@@ -26,7 +26,7 @@ reshape.miRSeq = function(data, sample_type = "TP"){
   idx = which(colnames(data)=='expression_log2')
   barcode = unique(data[,"tcga_participant_barcode"]) 
   mir = unique(data[,"mir"])
-  n = length(barcode) 
+  n = length(barcode)    
   p = length(mir)
   matrix = matrix(0, nrow = n, ncol = p)
   colnames(matrix) = mir

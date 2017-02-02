@@ -10,7 +10,7 @@ require("parallel")
 #' @export
 #' @seealso \code{dn_cohorts} uses the service \code{\link{Metadata.Cohorts}}, see \code{\link{FirebrowseR}}.
 #' @examples
-#' cohorts = dn_cohorts()
+#' cohorts = dn_cohorts()  
 dn_cohorts = function( filename=NULL ){
 
   cohorts = Metadata.Cohorts( format = "csv", cohort = "" )

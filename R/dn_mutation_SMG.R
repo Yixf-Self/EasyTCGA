@@ -3,7 +3,7 @@ require("FirebrowseR")
 require("parallel")
 require("plyr")
 
-
+  
 
 #' Download significantly mutated genes, as scored by MutSig. Results may be filtered by cohort, rank, gene, tool and/or Q-value threshold. At least one cohort or gene must be supplied.
 #' @param cohort A character vector indicating the cohort(s) to query, empty string queries all cohorts. See \code{\link{dn_cohorts}} for available cohorts.

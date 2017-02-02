@@ -101,7 +101,7 @@ dn_mRNASeq_cohort = function(cohort, page.Size, filename=NULL){
     cohort.mRNASeq = do.call(rbind, cohort.mRNASeq)
   }
 
-  return(cohort.mRNASeq)
+  return(cohort.mRNASeq)  
 
 }
 

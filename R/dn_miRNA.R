@@ -26,7 +26,7 @@ require("plyr")
 dn_miRSeq = function(mir, cohort, tcga_participant_barcode, page.Size, sort_by, filename=NULL){
 
   all.Found = F
-  page.Counter = 1
+  page.Counter = 1  
   mir.Exp = list()
 
   while(all.Found == F){

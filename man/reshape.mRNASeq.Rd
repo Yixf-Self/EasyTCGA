@@ -2,8 +2,8 @@
 % Please edit documentation in R/reshape.R
 \name{reshape.mRNASeq}
 \alias{reshape.mRNASeq}
-\title{Reshape sample-level log2 mRNASeq expression values of the sample type TP. Primarily this service is intended to reshape all sample-level log2 mRNASeq expression values of one cohort.
-See \code{\link{dn_mRNASeq_cohort}}.}
+\title{Reshape sample-level log2 mRNASeq expression values of the sample type TP. For reshaping all sample-level log2 
+mRNASeq expression values of one cohort, see \code{\link{dn_mRNASeq_cohort}}, use \code{\link{reshape.mRNASeq_geneID}}.}
 \usage{
 reshape.mRNASeq(data, sample_type = "TP")
 }
@@ -17,13 +17,16 @@ nxp-matrix, n = number of patients, p = number of genes, \cr
         i=1,..,n, j=1,...,p
 }
 \description{
-Reshape sample-level log2 mRNASeq expression values of the sample type TP. Primarily this service is intended to reshape all sample-level log2 mRNASeq expression values of one cohort.
-See \code{\link{dn_mRNASeq_cohort}}.
+Reshape sample-level log2 mRNASeq expression values of the sample type TP. For reshaping all sample-level log2 
+mRNASeq expression values of one cohort, see \code{\link{dn_mRNASeq_cohort}}, use \code{\link{reshape.mRNASeq_geneID}}.
 }
 \examples{
+gene = c("A1BG", "AAAS")
 cohort = "ESCA"
-page_size = 2000
-esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size)
-esca.mRNASeq_reshaped = reshape.mRNASeq (esca.mRNASeq, sample_type = "TP")
+tcga_participant_barcode = c("TCGA-2H-A9GF", "TCGA-LN-A49M") #  TCGA patient barcodes from ESCA
+sort_by = "gene"
+page.Size = 250
+obj = dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size)
+obj_reshaped = reshape.mRNASeq(obj, sample_type = "TP")
 }
 

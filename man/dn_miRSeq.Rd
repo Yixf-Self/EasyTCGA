@@ -2,7 +2,8 @@
 % Please edit documentation in R/dn_miRNA.R
 \name{dn_miRSeq}
 \alias{dn_miRSeq}
-\title{Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode.}
+\title{Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode. If the 
+output in an empty data.frame or there is a warning message, try again later and double check on \code{\link{http://firebrowse.org/api-docs/#!/Samples/miRSeq}} for data availability.}
 \usage{
 dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by,
   filename = NULL)
@@ -22,7 +23,8 @@ dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by,
 data.frame of log2 miRSeq expression values.
 }
 \description{
-Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode.
+Download sample-level log2 miRSeq expression values. Results may be filtered by mir, cohort and barcode. If the 
+output in an empty data.frame or there is a warning message, try again later and double check on \code{\link{http://firebrowse.org/api-docs/#!/Samples/miRSeq}} for data availability.
 }
 \examples{
 mir = miRNA_ID[1:10]

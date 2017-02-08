@@ -1,4 +1,3 @@
-
 #' Reshape sample-level log2 miRSeq expression values of the sample type TP. Primarily this service is intended to reshape all sample-level log2 miRSeq expression values of one cohort.
 #' See \code{\link{dn_miRSeq_cohort}}.
 #' @param data data.frame of log2 miRSeq expression values. See \code{\link{dn_miRSeq}} for downloading these values.
@@ -45,7 +44,7 @@ reshape.miRSeq = function(data, sample_type = "TP"){
 
 
 #' Reshape sample-level log2 mRNASeq expression values of the sample type TP. For reshaping all sample-level log2 
-#' mRNASeq expression values of one cohort, see \code{\link{dn_mRNASeq_cohort}}, use \code{\link{reshape.mRNASeq_geneID}.
+#' mRNASeq expression values of one cohort, see \code{\link{dn_mRNASeq_cohort}}, use \code{\link{reshape.mRNASeq_geneID}}.
 #' @param data data.frame of log2 mRNASeq expression values. See \code{\link{dn_mRNASeq}} for downloading these values.
 #' @return nxp-matrix, n = number of patients, p = number of genes, \cr
 #'         (matrix(i,j))_{i,j} = (matrix(i,j))_{i,j} =  (expression_log2)_{ij}, where \cr
@@ -53,7 +52,7 @@ reshape.miRSeq = function(data, sample_type = "TP"){
 #'         i=1,..,n, j=1,...,p
 #' @export
 #' @examples
-#' gene = c("A1BG", AAAS")
+#' gene = c("A1BG", "AAAS")
 #' cohort = "ESCA"
 #' tcga_participant_barcode = c("TCGA-2H-A9GF", "TCGA-LN-A49M") #  TCGA patient barcodes from ESCA
 #' sort_by = "gene"
@@ -84,10 +83,8 @@ reshape.mRNASeq = function(data, sample_type = "TP"){
 }
 
 
-
-
 #' Reshape sample-level log2 mRNASeq expression values of the sample type TP. Primarily this service is intended to reshape all sample-level log2 mRNASeq expression values of one cohort.
-#' See \code{\link{dn_mRNASeq_cohort}}. \code{\link{gene_geneID} is a data.frame providing genes and the corresponding gene ID's.
+#' See \code{\link{dn_mRNASeq_cohort}}. \code{\link{gene_geneID}} is a data.frame providing genes and the corresponding gene ID's.
 #' @param data data.frame of log2 mRNASeq expression values. See \code{\link{dn_mRNASeq}} for downloading these values.
 #' @return nxp-matrix, n = number of patients, p = number of gene ID's, \cr
 #'         (matrix(i,j))_{i,j} = (matrix(i,j))_{i,j} =  (expression_log2)_{ij}, where \cr

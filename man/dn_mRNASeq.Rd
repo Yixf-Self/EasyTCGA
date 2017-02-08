@@ -2,7 +2,8 @@
 % Please edit documentation in R/dn_mRNA.R
 \name{dn_mRNASeq}
 \alias{dn_mRNASeq}
-\title{Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort.}
+\title{Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort.  If the 
+output in an empty data.frame or there is a warning message, try again later and double check on \code{\link{http://firebrowse.org/api-docs/#!/Samples/mRNASeq}} for data availability.}
 \usage{
 dn_mRNASeq(gene, cohort, tcga_participant_barcode, page.Size, sort_by,
   filename = NULL)
@@ -22,7 +23,8 @@ dn_mRNASeq(gene, cohort, tcga_participant_barcode, page.Size, sort_by,
 data.frame of log2 mRNASeq expression values.
 }
 \description{
-Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort.
+Download sample-level log2 mRNASeq expression values. Results may be filtered by gene, tcga_participant_barcode and cohort.  If the 
+output in an empty data.frame or there is a warning message, try again later and double check on \code{\link{http://firebrowse.org/api-docs/#!/Samples/mRNASeq}} for data availability.
 }
 \examples{
 gene = "AAAS" 
@@ -30,7 +32,7 @@ cohort = "ESCA"
 tcga_participant_barcode = c("TCGA-2H-A9GF", "TCGA-LN-A49M") #  TCGA patient barcodes from ESCA
 sort_by = "gene"
 page.Size = 250
-obj = dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size2)
+obj = dn_mRNASeq(gene, cohort, tcga_participant_barcode, sort_by, page.Size)
 }
 \seealso{
 \code{dn_mRNASeq} uses the service \code{\link{Samples.mRNASeq}}, see \code{\link{FirebrowseR}}.

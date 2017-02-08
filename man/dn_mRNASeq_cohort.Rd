@@ -10,8 +10,6 @@ dn_mRNASeq_cohort(cohort, page.Size, filename = NULL)
 \item{cohort}{A character vector containing the cohort to query. See \code{\link{dn_cohorts}} for available cohorts.}
 
 \item{page.Size}{Number of records per page. Usually max is 2000. page.Size should be chosen bigger than the number of patients of the cohort.}
-
-\item{mRNA_ID}{A character vector containing gene symbols. See \code{\link{mRNA_ID.R}} for available gene symbols.}
 }
 \value{
 data.frame of sample-level log2 mRNASeq expression values of the specified cohort.
@@ -22,7 +20,7 @@ Download all available sample-level log2 mRNASeq expression values of one cohort
 \examples{
 cohort = "ESCA"
 page_size = 2000
-esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size2)
+esca.mRNASeq = dn_mRNASeq_cohort(cohort, page.Size)
 }
 \seealso{
 \code{dn_mRNASeq_cohort} uses the service \code{\link{dn_mRNASeq}}.

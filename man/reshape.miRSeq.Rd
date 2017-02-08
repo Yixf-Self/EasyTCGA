@@ -22,9 +22,16 @@ See \code{\link{dn_miRSeq_cohort}}.
 }
 \examples{
  
+mir = miRNA_ID[1:10]
+cohort = "BLCA"
+tcga_participant_barcode = "TCGA-ZF-AA53"  # TCGA patient barcode from BLCA
+page.Size = 250
+sort_by = "mir"
+obj = dn_miRSeq(mir, cohort, tcga_participant_barcode, page.Size, sort_by)
+
 cohort = "ESCA"     
 page_size = 2000
-esca.miRSeq = dn_miRSeq_cohort(cohort, page.Size)
+esca.miRSeq = dn_miRSeq_cohort(cohort, page.Size2)
 esca.miRSeq_reshaped = reshape.miRSeq (esca.miRSeq, sample_type = "TP")
 }
 

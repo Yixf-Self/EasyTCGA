@@ -13,7 +13,7 @@ A character vektor containing all TCGA cohort abbreviations which are relevant f
 Download all available cohorts / cancer types.
 }
 \examples{
-cohorts = dn_cohorts()
+cohorts = dn_cohorts()  
 }
 \seealso{
 \code{dn_cohorts} uses the service \code{\link{Metadata.Cohorts}}, see \code{\link{FirebrowseR}}.
